@@ -114,7 +114,7 @@ export default function LoadingScreen() {
                                         verticalAlign: 'top',
                                     }}
                                 >
-                                    "
+                                    &ldquo;
                                 </span>
                                 
                                 {/* Quote text */}
@@ -134,7 +134,7 @@ export default function LoadingScreen() {
                                         verticalAlign: 'bottom',
                                     }}
                                 >
-                                    "
+                                    &rdquo;
                                 </span>
                             </motion.div>
                         </AnimatePresence>

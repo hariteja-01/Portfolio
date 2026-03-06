@@ -97,7 +97,7 @@ export default function HiddenCompetitiveMode() {
                         className="absolute top-20 left-8 font-mono text-xs"
                         style={{ color: '#00F0FF', letterSpacing: '0.2em' }}
                     >
-                        // COMPETITIVE_MODE: ACTIVE
+                        {'// COMPETITIVE_MODE: ACTIVE'}
                     </motion.div>
 
                     <motion.div
