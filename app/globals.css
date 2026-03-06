@@ -1,0 +1,347 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────── */
+:root {
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #111118;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --text-primary: #F1F1F1;
+  --text-secondary: #6B7280;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --cursor-glow: rgba(0, 240, 255, 0.15);
+}
+
+/* Smooth 300ms transition on all CSS variable consumers (theme switch) */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Opt-out for elements that need instant transitions (animations, transforms) */
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
+}
+
+/* ─── Light Mode ─────────────────────────────────────────────────────── */
+.light-mode {
+  --bg-primary: #F5F5F7;
+  --bg-secondary: #FFFFFF;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --cursor-glow: rgba(0, 240, 255, 0.08);
+}
+
+/* ─── Minimal Mode ────────────────────────────────────────────────────── */
+.minimal-mode .canvas-scroll-heavy {
+  display: none !important;
+}
+
+.minimal-mode canvas.sparkle-canvas {
+  opacity: 0.3 !important;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────── */
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.3);
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* ─── Cursor ──────────────────────────────────────────────────────────── */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* ─── Animations ──────────────────────────────────────────────────────── */
+@keyframes typing-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: typing-blink 1s infinite;
+}
+
+/* Noise grain overlay keyframe */
+@keyframes noise-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-2px, 1px);
+  }
+
+  50% {
+    transform: translate(1px, -2px);
+  }
+
+  75% {
+    transform: translate(2px, 1px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Slow gradient drift for hero background */
+@keyframes gradient-drift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Data-line flow animation (used in AnimatedSectionDivider via inline motion) */
+@keyframes data-line-flow {
+  0% {
+    left: 0%;
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Glitch animation for competitive mode */
+@keyframes glitch-h {
+  0% {
+    clip-path: inset(0 0 95% 0);
+    transform: skew(-5deg);
+  }
+
+  20% {
+    clip-path: inset(30% 0 50% 0);
+    transform: skew(4deg);
+  }
+
+  40% {
+    clip-path: inset(70% 0 5% 0);
+    transform: skew(-2deg);
+  }
+
+  60% {
+    clip-path: inset(15% 0 75% 0);
+    transform: skew(3deg);
+  }
+
+  80% {
+    clip-path: inset(50% 0 30% 0);
+    transform: skew(-4deg);
+  }
+
+  100% {
+    clip-path: inset(95% 0 0 0);
+    transform: skew(0deg);
+  }
+}
+
+/* 3D Card depth utility */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.card-3d:hover {
+  transform: translateZ(4px) translateY(-2px);
+}
+
+/* Button Z-lift on hover */
+.btn-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.btn-lift:hover {
+  transform: translateZ(6px) translateY(-2px) scale(1.02) !important;
+}
+
+/* Perspective utility for 3D components */
+.perspective {
+  perspective: 1200px;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Hero orb animations */
+@keyframes hero-orb-1 {
+
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-20px, 30px) scale(0.95);
+  }
+}
+
+@keyframes hero-orb-2 {
+
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(-25px, 35px) scale(1.08);
+  }
+
+  66% {
+    transform: translate(35px, -25px) scale(0.92);
+  }
+}
+
+@keyframes hero-orb-3 {
+
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(20px, 15px) scale(0.96);
+  }
+
+  66% {
+    transform: translate(-30px, -20px) scale(1.04);
+  }
+}
+
+@keyframes hero-orb-4 {
+
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+
+  50% {
+    transform: translate(-40px, 20px);
+  }
+}
+
+.animate-hero-orb-1 {
+  animation: hero-orb-1 22s ease-in-out infinite;
+}
+
+.animate-hero-orb-2 {
+  animation: hero-orb-2 28s ease-in-out infinite;
+}
+
+.animate-hero-orb-3 {
+  animation: hero-orb-3 18s ease-in-out infinite;
+}
+
+/* ─── Lottie Theme Compatibility ─────────────────────────────────────── */
+/* Adjust Lottie animations for light mode to ensure visibility */
+.light-mode .lottie-hero-container svg,
+.light-mode .lottie-loading-container svg,
+.light-mode .lottie-contact-container svg {
+  /* Slightly increase contrast for light backgrounds */
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Dark mode - add subtle glow to Lottie animations */
+.dark .lottie-hero-container svg,
+.lottie-hero-container svg {
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.15));
+}
+
+.dark .lottie-loading-container svg,
+.lottie-loading-container svg {
+  filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.2));
+}
+
+/* Ensure text remains visible in both modes */
+.text-theme-adaptive {
+  color: var(--text-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .text-theme-adaptive {
+  text-shadow: none;
+}

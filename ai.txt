@@ -1,0 +1,698 @@
+================================================================================
+                     HARI TEJA PATNALA — PORTFOLIO WEBSITE
+                         Complete Technical Description
+================================================================================
+
+
+1. OVERVIEW
+--------------------------------------------------------------------------------
+
+This is a premium, interactive, single-page portfolio website built for
+Hari Teja Patnala — an Algorithm Engineer & Full-Stack Developer. The site
+showcases three flagship projects through an immersive, three-view architecture
+that transitions users from a landing page into full project deep-dives using
+scroll-driven video expansions and canvas-based frame-by-frame scroll
+animations. It is designed to feel like a high-end product page (think Apple)
+rather than a typical developer portfolio.
+
+URL Structure: Single page (/) — all navigation is client-side with animated
+view transitions.
+
+
+2. TECH STACK
+--------------------------------------------------------------------------------
+
+  Framework        :  Next.js 14.2 (App Router, static export support)
+  Language         :  TypeScript (strict)
+  UI Library       :  React 18.3
+  Styling          :  Tailwind CSS 3.4 + CSS custom properties (CSS variables)
+  Animation        :  Framer Motion 11.15 (page transitions, scroll-linked
+                      transforms, spring physics, AnimatePresence)
+                      GSAP 3.14 (available for complex timelines)
+  Icons            :  Lucide React 0.575
+  Utility          :  clsx + tailwind-merge (conditional class composition)
+  Typography       :  Google Fonts — Inter (loaded via next/font)
+  Build            :  PostCSS + Autoprefixer
+  Linting          :  ESLint with eslint-config-next
+  Package Manager  :  npm
+  Dev Server       :  next dev
+
+
+3. COLOR SYSTEM & THEMING
+--------------------------------------------------------------------------------
+
+The site supports full DARK/LIGHT mode toggling, persisted to localStorage.
+Theme switching is handled by a React Context (ThemeProvider) that dynamically
+sets CSS custom properties on <html>.
+
+  Dark Mode (default):
+    --bg-primary      : #0A0A0F  (near-black)
+    --bg-secondary    : #111118
+    --bg-card         : rgba(255, 255, 255, 0.05)
+    --text-primary    : #F1F1F1
+    --text-secondary  : #6B7280
+    --border-color    : rgba(255, 255, 255, 0.1)
+    --glass-bg        : rgba(255, 255, 255, 0.05)
+    --cursor-glow     : rgba(0, 240, 255, 0.15)
+
+  Light Mode:
+    --bg-primary      : #F5F5F7
+    --bg-secondary    : #FFFFFF
+    --text-primary    : #1D1D1F
+    --text-secondary  : #86868B
+
+  Project Accent Colors:
+    AlgoQuest (Cyan)       : #00F0FF
+    AI Game Tester (Violet): #8B5CF6
+    Property Oracle (Orange): #FF6B35
+
+  Additional Tailwind palette:
+    gold  : #FFB74D
+    void  : #0A0A0F (deepest black)
+
+  Gradients used throughout:
+    Hero gradient      : linear-gradient(90deg, #00F0FF, #8B5CF6, #FF6B35)
+    Per-project gradient: 135deg from themeColor to a darker shade
+
+
+4. WEBSITE ARCHITECTURE — THREE-VIEW SYSTEM
+--------------------------------------------------------------------------------
+
+The entire site is a single React page (app/page.tsx) that manages three
+mutually exclusive "view states", animated with Framer Motion's AnimatePresence:
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  VIEW 1: "landing"                                              │
+  │  ─────────────────                                              │
+  │  The main portfolio landing page. Contains:                     │
+  │   • HeroSection (full-screen intro with 3D character)           │
+  │   • AboutSection (stats, certifications, achievement ticker)    │
+  │   • ProjectCardStack (interactive fan-out card carousel)        │
+  │   • ContactSection (contact form + social links)                │
+  │   • Footer                                                      │
+  │  Each section separated by animated gradient dividers.          │
+  │                                                                  │
+  │  USER ACTION: Click a project card →                            │
+  └──────────────────────┬───────────────────────────────────────────┘
+                         │
+                         ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  VIEW 2: "expanding"                                            │
+  │  ──────────────────                                             │
+  │  A full-screen scroll-to-expand video transition:               │
+  │   • Background image from the project                           │
+  │   • A small centered video frame that EXPANDS as you scroll     │
+  │   • Title & date overlay with mix-blend-mode text               │
+  │   • "Scroll to expand" indicator                                │
+  │   • Once fully expanded: shows project summary + CTA buttons    │
+  │     ("Enter Full Experience →" and "← Back")                    │
+  │                                                                  │
+  │  Uses: ScrollExpandMedia component (custom scroll physics,      │
+  │         wheel + touch + native scroll support)                  │
+  │                                                                  │
+  │  USER ACTION: Click "Enter Full Experience →" →                 │
+  └──────────────────────┬───────────────────────────────────────────┘
+                         │
+                         ▼
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  VIEW 3: "deepdive"                                             │
+  │  ─────────────────                                              │
+  │  The full project showcase with:                                │
+  │   • CanvasScrollAnimation (200-frame image sequence animated    │
+  │     by scroll — like an Apple product page. The images play     │
+  │     back as you scroll through a 500vh tall section)            │
+  │   • ScrollTextOverlays (4 text sections that fade in/out at     │
+  │     different scroll positions over the canvas animation)       │
+  │   • ProjectDetails (detailed project description section)       │
+  │   • StorySection (the "story behind the project" narrative)     │
+  │   • CTASection (GitHub link, tech highlights, next project)     │
+  │   • ContactSection                                              │
+  │   • Footer                                                      │
+  │                                                                  │
+  │  Fixed UI overlays:                                             │
+  │   • ModeNavigation — bottom-center dot indicators to switch     │
+  │     between the 3 projects                                      │
+  │   • ArrowNavigation — left/right arrows to cycle projects       │
+  │                                                                  │
+  │  USER ACTION: Navigate between projects or click "← Back"      │
+  └──────────────────────────────────────────────────────────────────┘
+
+
+5. COMPONENT-BY-COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------
+
+5.1 LoadingScreen
+    Location  : components/LoadingScreen.tsx
+    Purpose   : Full-screen branded intro that appears for ~2 seconds on
+                initial page load.
+    Visuals   : Monospace text "<HT/>" with each letter animating in
+                sequentially (staggered fade-up). Below it, a gradient
+                progress bar (cyan → violet → orange) scales in from left.
+                The entire screen then fades out to reveal the site.
+
+5.2 CustomCursor
+    Location  : components/CustomCursor.tsx
+    Purpose   : Replaces the default OS cursor on desktop devices (pointer:fine)
+                with a custom animated cursor.
+    Visuals   : Three layers —
+                • Inner Dot: 8px cyan (#00F0FF) circle, follows mouse instantly
+                • Outer Ring: 36px circle border that follows with a smooth
+                  lerp (0.12 factor), creating a trailing effect
+                • Glow: Full-screen radial gradient that follows the mouse,
+                  casting a subtle cyan glow on surrounding content
+    States    :
+      - default  : 8px dot + 36px ring
+      - pointer  : dot disappears, ring grows to 50px with fill
+      - project  : dot disappears, ring grows to 80px, shows "View →" text
+      - wave     : ring 60px, shows 👋 emoji
+    Note: Disabled on mobile/touch devices.
+
+5.3 ScrollProgress
+    Location  : components/ScrollProgress.tsx
+    Purpose   : A thin progress bar at the very top of the viewport showing
+                how far the user has scrolled on the page.
+
+5.4 Navbar
+    Location  : components/Navbar.tsx (311 lines)
+    Purpose   : Persistent top navigation bar.
+    Features  :
+      - Glassmorphic background (blur + transparency)
+      - Hides on scroll-down, reappears on scroll-up
+      - Left: Brand mark "HT" with gradient
+      - Center: Navigation links (About, Projects, Contact) — only in
+        landing view
+      - Right: Dark/Light theme toggle button + Resume download button
+      - In project view: shows "← Portfolio" back button instead of nav links
+      - Mobile: Full-screen hamburger menu with staggered animations
+      - All hover states have smooth color transitions
+
+5.5 HeroSection
+    Location  : components/sections/HeroSection.tsx (302 lines)
+    Purpose   : Full-screen hero/intro section — the first thing visitors see.
+    Layout    : Two-column grid on desktop (3/5 + 2/5 split):
+      LEFT COLUMN:
+        - "Available for opportunities" badge (pulsing green dot + glass card)
+        - Name "Hari Teja / Patnala" — each letter animates in individually
+          with staggered delays (character-by-character reveal)
+        - Gradient underline bar (cyan → violet → orange) scales in
+        - Tagline: "Algorithm Engineer & Full-Stack Developer"
+        - Description paragraph with color-highlighted keywords:
+          "800+ LeetCode" (cyan), "Oracle Cloud certified" (violet),
+          "algorithms, ML" (orange)
+        - Two CTA buttons:
+          • "Explore My Work" — gradient filled, rounded pill with glow shadow
+          • "Download CV" — outlined pill with hover glow effect
+        - Social links row: GitHub, LinkedIn, LeetCode, Email — each with
+          underline-on-hover animation
+      RIGHT COLUMN (desktop only):
+        - Student3D component — an interactive 3D-ish animated student
+          character
+
+    Background layers:
+      1. SparkleBackground — full-screen canvas particle system
+      2. Four animated gradient orbs (blurred, floating, 25-30s cycles):
+         - Cyan orb (600px, at top-left)
+         - Violet orb (500px, at center-right)
+         - Orange orb (450px, at bottom-center)
+         - Green orb (300px, at center)
+      3. Dot grid pattern overlay (30px spacing, very subtle)
+      4. Scroll indicator arrow at bottom ("↓ Scroll to explore")
+
+5.6 SparkleBackground
+    Location  : components/SparkleBackground.tsx (206 lines)
+    Purpose   : A canvas-based particle system covering the entire hero section.
+    Visuals   : ~80 diamond/cross-shaped sparkle particles in 6 colors (cyan,
+                violet, orange, gold, green, pink). Each particle:
+      - Drifts upward slightly with random velocity
+      - Has a pulsing shimmer opacity animation
+      - Gets gently attracted toward the mouse cursor (within 200px radius)
+      - Has a soft glow (canvas shadowBlur)
+      - Spawns new burst particles near the mouse position every 8 frames
+    Shape     : 4-point star + rotated cross (drawn with canvas paths)
+    Performance: Bounded at count + 20 max particles; uses requestAnimationFrame
+
+5.7 Student3D
+    Location  : components/Student3D.tsx (324 lines)
+    Purpose   : An interactive CSS-rendered 3D student character displayed
+                next to the hero text.
+    Features  :
+      - Responds to scroll with head-tilt animation
+      - Has a "wave" interaction (👋 cursor state)
+      - Built with layered div transforms for pseudo-3D appearance
+      - AnimatePresence for state transitions
+
+5.8 AboutSection
+    Location  : components/sections/AboutSection.tsx (341 lines)
+    Purpose   : Showcases stats, education, achievements, and certifications.
+    Features  :
+      - AnimatedCounter component: numbers that count up when scrolled into
+        view (e.g., 900+ → counts from 0 to 900, 9.18 CGPA, 4 certifications)
+      - GlassmorphicCard containers for each stat block
+      - Education info: LPU, B.Tech CSE, CGPA 9.18/10, expected Jul 2027
+      - Achievements marquee/ticker: "900+ LeetCode Problems", "IMO State
+        Rank 1", "Oracle OCI Certified", "MumbaiHacks 2025 Finalist",
+        "9.18 CGPA", "NPTEL IIT Madras Certified" — scrolls horizontally
+      - Certifications grid: Oracle OCI Data Science/Developer Professional,
+        IBM Coursera Python for Data Science & AI, Microsoft GenAI Essentials
+      - Section fades in with Framer Motion viewport detection
+
+5.9 GlassmorphicCard
+    Location  : components/GlassmorphicCard.tsx (50 lines)
+    Purpose   : Reusable glassmorphism container card.
+    Visuals   : Semi-transparent background + 20px blur + 180% saturation +
+                subtle border + rounded corners (16px). Optional hover glow
+                with configurable color (defaults to cyan) + lift effect.
+
+5.10 ProjectCardStack
+    Location  : components/sections/ProjectCardStack.tsx (292 lines)
+    Purpose   : Displays all three projects as an interactive "fan-out"
+                card stack carousel.
+    Features  :
+      - Uses the CardStack UI component (fan-spread layout with 3D perspective)
+      - Each card shows:
+        • Project cover image (from /images/<project>/1.jpg)
+        • Auto-playing hover video (mp4) with poster fallback (webp)
+        • Project name, subtitle, role
+        • Tech stack tags (colored pills)
+        • Stats row (e.g., "Learning Boost: 40%", "Algorithms: 15+")
+        • "Explore Project →" button styled with project's themeColor
+      - Cards spread in a fan layout with configurable overlap, tilt, depth
+      - Keyboard navigation (left/right arrows)
+      - Drag-to-navigate on touch
+      - Dot indicators below the stack
+      - Spring-based physics animations (stiffness: 280, damping: 28)
+
+5.11 CardStack (UI Primitive)
+    Location  : components/ui/card-stack.tsx (412 lines)
+    Purpose   : Generic, reusable fan-spread card carousel with 3D perspective.
+    Config    :
+      - cardWidth: 520px, cardHeight: 320px
+      - overlap: 0.48, spreadDeg: 48°
+      - perspectivePx: 1100, depthPx: 140, tiltXDeg: 12°
+      - activeLiftPx: 22
+      - Loop mode, auto-advance optional
+      - Drag-to-dismiss with velocity detection
+    Animation : Framer Motion spring transitions for 3D rotation, translation,
+                scale, and opacity.
+
+5.12 ScrollExpandMedia
+    Location  : components/ui/scroll-expansion-hero.tsx (316 lines)
+    Purpose   : The immersive scroll-driven video expansion transition
+                (VIEW 2: "expanding").
+    How it works:
+      - On entering this view, a background image fills the viewport
+      - A small centered frame (video or image) starts at ~40% size
+      - As the user scrolls/swipes, the frame smoothly expands toward
+        fullscreen using accumulated scroll delta
+      - Title (project name) and date (subtitle) overlay with optional
+        mix-blend-mode "difference" for text blending
+      - An animated "Scroll to expand" indicator pulses at the bottom
+      - Once expansion reaches 100%, children content is revealed below
+        with a fade-in animation
+      - Supports: wheel events, touch events, native scroll fallback
+      - Mobile-responsive: adjusts initial size and uses touch gestures
+
+5.13 CanvasScrollAnimation
+    Location  : components/CanvasScrollAnimation.tsx (195 lines)
+    Purpose   : Frame-by-frame image sequence animation driven by scroll
+                position (Apple-style product page effect).
+    How it works:
+      - Pre-loads 200 JPEG frames from /images/<project>/1.jpg to 200.jpg
+      - Uses an HTML5 <canvas> element (sticky position, 100vh)
+      - The wrapper div is 500vh tall — as the user scrolls through it,
+        Framer Motion's useScroll tracks progress (0.0 → 1.0)
+      - progress * 200 = current frame index
+      - Each frame is drawn with object-fit: cover calculations
+      - Shows a loading progress bar (themed) while images load
+    Per project: 200 frames each (600 total frames across all 3 projects)
+
+5.14 ScrollTextOverlays
+    Location  : components/ScrollTextOverlays.tsx (134 lines)
+    Purpose   : Text sections that fade in and out over the canvas scroll
+                animation at specific scroll positions.
+    Structure : 4 text sections per project, each with title + subtitle:
+      - Section 1 (0%–15%): Project name + tagline
+      - Section 2 (25%–40%): Key feature 1
+      - Section 3 (50%–65%): Key feature 2
+      - Section 4 (75%–90%): Project ethos statement
+      - Role tag at top (e.g., "HARI TEJA PATNALA — Algorithm Engineer")
+    All text: large (5xl–8xl), bold, white, with text-shadow for contrast
+              against the video frames.
+
+5.15 ProjectDetails
+    Location  : components/ProjectDetails.tsx
+    Purpose   : Detailed project description section in deep-dive view.
+    Content   : Title (e.g., "The Algorithm Arena") + long-form description
+                paragraph.
+
+5.16 StorySection
+    Location  : components/StorySection.tsx
+    Purpose   : "Story behind the project" narrative section.
+    Content   : Title (e.g., "From 800+ LeetCode Problems to This") +
+                paragraph explaining the personal motivation.
+
+5.17 CTASection
+    Location  : components/CTASection.tsx (114 lines)
+    Purpose   : Call-to-action section at the end of each project deep-dive.
+    Content   :
+      - Project tagline (italicized)
+      - Tech highlight pills (bordered, colored with themeColor)
+      - "View on GitHub" primary button (gradient-filled, rounded pill)
+      - Secondary links: GitHub, LinkedIn, Email
+      - "Next Project →" button (only if not the last project)
+
+5.18 ContactSection
+    Location  : components/ContactSection.tsx (195 lines)
+    Purpose   : Contact form + direct contact info.
+    Features  :
+      - GlassmorphicCard container
+      - Form fields: Name, Email, Message (with styled inputs)
+      - Submit button with gradient background
+      - Direct contact links: email (patnalahariteja@gmail.com),
+        phone (+91-9392329691)
+      - Social links: GitHub, LinkedIn, LeetCode
+
+5.19 ModeNavigation
+    Location  : components/ModeNavigation.tsx (77 lines)
+    Purpose   : Fixed bottom-center navigation dots for switching between
+                the 3 projects during deep-dive view.
+    Visuals   : Glassmorphic pill bar (black/60% + backdrop-blur) with
+                3 colored dots. Active dot is larger with glow shadow.
+                Hover shows tooltip with project name.
+
+5.20 ArrowNavigation
+    Location  : components/ArrowNavigation.tsx
+    Purpose   : Fixed left/right arrow buttons for cycling through projects
+                during deep-dive view.
+
+5.21 Footer
+    Location  : components/Footer.tsx (144 lines)
+    Purpose   : Bottom section with 3-column grid:
+      - Column 1: Name + tagline
+      - Column 2: Links (GitHub, LinkedIn, LeetCode) with hover effects
+      - Column 3: Contact (email, phone) with hover effects
+      - Bottom bar: "Designed & Built by Hari Teja Patnala • 2025"
+
+5.22 ThemeProvider
+    Location  : components/ThemeProvider.tsx (100 lines)
+    Purpose   : React Context for dark/light theme management.
+    Features  : Reads from localStorage on mount, updates CSS custom properties
+                dynamically, provides useTheme() hook.
+
+5.23 SmoothReveal
+    Location  : components/SmoothReveal.tsx
+    Purpose   : Utility wrapper component for smooth scroll-triggered reveal
+                animations (fade + slide).
+
+5.24 ParallaxSection
+    Location  : components/ParallaxSection.tsx
+    Purpose   : Utility wrapper for parallax scroll effects.
+
+5.25 AboutBanner
+    Location  : components/AboutBanner.tsx
+    Purpose   : An alternative/extended about banner component.
+
+5.26 ProjectsShowcase
+    Location  : components/sections/ProjectsShowcase.tsx (175 lines)
+    Purpose   : An alternative grid-based project showcase layout (available
+                as an alternative to the card stack).
+
+5.27 AI Image Generator Hero
+    Location  : components/ui/ai-image-generator-hero.tsx
+    Purpose   : An AI-powered image carousel hero component (available for
+                dynamic background effects).
+
+
+6. MEDIA ASSETS
+--------------------------------------------------------------------------------
+
+6.1 Project Videos (MP4)
+    These are full demonstration recordings of each project in action:
+      /images/algoquest-video.mp4    (~9 MB)   — AlgoQuest demo
+      /images/dashboard-video.mp4    (~13 MB)  — AI Game Tester demo
+      /images/realestate-video.mp4   (~17 MB)  — Property Oracle demo
+
+    Used in:
+      • ProjectCardStack (auto-play on hover)
+      • ScrollExpandMedia (expanding video transition — VIEW 2)
+
+6.2 Project Poster Images (WebP)
+    Static fallback/poster frames for each video:
+      /images/algoquest-end.webp     (~1 MB)
+      /images/dashboard-end.webp     (~1 MB)
+      /images/realestate-end.webp    (~1 MB)
+
+6.3 Canvas Scroll Animation Frames (JPG)
+    200 sequential JPEG frames per project (600 total), stored in:
+      /images/algoquest/1.jpg  through  /images/algoquest/200.jpg
+      /images/dashboard/1.jpg  through  /images/dashboard/200.jpg
+      /images/realestate/1.jpg through  /images/realestate/200.jpg
+
+    These create the Apple-style scroll-driven video effect in VIEW 3.
+    The first frame (1.jpg) also serves as the project card cover image.
+
+6.4 Resume
+    /resume.pdf  (~112 KB) — downloadable resume, linked from the hero
+    section and navbar.
+
+
+7. THE THREE SHOWCASED PROJECTS
+--------------------------------------------------------------------------------
+
+7.1 AlgoQuest — Algorithm Visualizer
+    Role       : Algorithm Engineer
+    Tech Stack : React.js, TypeScript, Tailwind CSS, HTML5
+    Theme Color: #00F0FF (Cyan)
+    Stats      : 40% Learning Boost | 15+ Algorithms | 3 Code Languages
+    Description: An interactive algorithm visualization platform. Watch
+                 N-Queens backtrack in real-time, see Trie nodes light up,
+                 observe DP tables fill cell-by-cell. Features multi-language
+                 code generation (Python, C++, JavaScript) with real-time
+                 performance analytics.
+    Story      : Born from 800+ LeetCode problems — every visualization is
+                 informed by hundreds of hours of competitive programming.
+    GitHub     : https://github.com/hariteja-01/algoquest
+
+7.2 AI Game Tester — Gemini-Powered Dashboard
+    Role       : AI Engineer
+    Tech Stack : Python, Streamlit, Gemini API, Plotly
+    Theme Color: #8B5CF6 (Violet)
+    Stats      : 700+ Games Parsed | Gemini AI Model | <2s Response
+    Description: An AI-powered QA testing dashboard. Google Gemini API
+                 processes error logs and crash reports across 700+ game
+                 titles. Multimodal chatbot analyzes screenshots, identifies
+                 visual glitches, and cross-references with known crash
+                 patterns. Real-time Plotly visualizations track CPU/GPU
+                 usage and FPS stability.
+    Story      : Pushes beyond traditional dashboards — this one understands
+                 data through Gemini's multimodal capabilities.
+    GitHub     : https://github.com/hariteja-01/ai-game-dashboard
+
+7.3 Property Oracle — ML Analytics Engine
+    Role       : Data Scientist
+    Tech Stack : Python, XGBoost, Scikit-learn, Streamlit, Folium, SHAP
+    Theme Color: #FF6B35 (Orange)
+    Stats      : 92% Accuracy | 80K+ Records | 20 Years Data Span
+    Description: A complete ML analytics engine for real estate. Processes
+                 80,000+ property records spanning 20 years using XGBoost
+                 and Random Forest ensembles. SHAP value analysis provides
+                 full transparency — users see exactly why a property is
+                 valued the way it is. Geospatial Folium visualizations
+                 reveal regional pricing trends.
+    Story      : Combines Data Science background with Financial Markets
+                 knowledge for market sentiment and temporal trend analysis.
+    GitHub     : https://github.com/hariteja-01/real-estate-ml
+
+
+8. ANIMATIONS & MICRO-INTERACTIONS INVENTORY
+--------------------------------------------------------------------------------
+
+  Loading Screen:
+    • Letter-by-letter staggered fade-up for "<HT/>"
+    • Gradient bar scale-in animation
+    • Full-screen fade-out exit
+
+  Custom Cursor:
+    • Inner dot follows mouse instantly
+    • Outer ring lerps behind with 0.12 easing factor (trailing effect)
+    • Radial gradient glow follows mouse
+    • State transitions (size/opacity) with 0.2s ease
+
+  Hero Section:
+    • Character-by-character name reveal with staggered delays
+    • Gradient underline bar scales from left
+    • Fade-up animations for tagline, description, buttons
+    • Social links stagger in
+    • Four gradient orbs float on 22-30s looping paths
+    • Sparkle particles drift, shimmer, and react to cursor
+    • Scroll indicator bounces (↓)
+
+  About Section:
+    • AnimatedCounters count from 0 to target on scroll-into-view
+    • Glassmorphic cards with hover glow + lift
+    • Achievement ticker marquee (horizontal auto-scroll, 20s loop)
+    • Section fade-in on viewport entry
+
+  Project Card Stack:
+    • Cards fan out in 3D perspective (rotateY, translateZ)
+    • Spring-based drag interactions
+    • Active card lifts with scale
+    • Video auto-plays on hover, reverts to poster on leave
+    • Dot indicators animate active state
+
+  Scroll-Expand Video (VIEW 2):
+    • Video frame smoothly scales from ~40% to 100% on scroll
+    • Text overlays blend with mix-blend-mode: difference
+    • "Scroll to expand" pulses with opacity animation
+    • Children fade in once expansion completes
+
+  Canvas Scroll Animation (VIEW 3):
+    • 200 frames play back as 0→100% scroll animation
+    • 500vh tall trigger zone for smooth scrubbing
+    • Text overlays fade in/out at 4 positions during scroll
+    • Loading bar with percentage counter
+
+  Page Transitions:
+    • AnimatePresence with "wait" mode between views
+    • Fade + slide (y: 20px) transitions, 400ms duration
+
+  Navigation:
+    • Navbar: hide on scroll-down, show on scroll-up
+    • Mode dots: glow + scale on active, tooltip on hover
+    • Arrow navigation with hover states
+
+  General:
+    • All interactive elements have hover color transitions
+    • Buttons have hover:scale-105 transforms
+    • Section dividers use gradient fade (transparent → border → transparent)
+    • Smooth scroll behavior (CSS scroll-behavior: smooth)
+    • Custom scrollbar (6px, cyan-tinted thumb)
+    • Text selection highlight: cyan at 30% opacity
+
+
+9. RESPONSIVE DESIGN
+--------------------------------------------------------------------------------
+
+  - Full mobile support with touch gesture handling
+  - Custom cursor disabled on touch devices (pointer: coarse)
+  - Hamburger menu on mobile with full-screen overlay
+  - Hero section: stacks vertically, 3D character hidden on mobile
+  - Card stack adjusts dimensions for smaller screens
+  - ScrollExpandMedia adapts initial size and uses touch swipe
+  - Text sizes scale down: xl/2xl on mobile → 7xl/8xl on large screens
+  - All grids collapse from multi-column to single column
+
+
+10. SEO & METADATA
+--------------------------------------------------------------------------------
+
+  Title      : "Hari Teja Patnala | Algorithm Engineer & Full-Stack Developer"
+  Description: "Interactive 3D portfolio — 800+ LeetCode problems, Oracle
+                Cloud certified, building at the intersection of algorithms,
+                AI, and web engineering."
+  Language   : English (lang="en")
+  Semantic HTML: Proper section, nav, footer, heading hierarchy
+  Font optimization: next/font for Inter with Latin subset preloading
+
+
+11. FILE STRUCTURE
+--------------------------------------------------------------------------------
+
+  HariPortfolio/
+  ├── app/
+  │   ├── globals.css           (CSS variables, scrollbar, cursor rules)
+  │   ├── layout.tsx            (Root layout: Inter font, ThemeProvider)
+  │   └── page.tsx              (Main page: 3-view architecture)
+  │
+  ├── components/
+  │   ├── AboutBanner.tsx
+  │   ├── ArrowNavigation.tsx
+  │   ├── CTASection.tsx
+  │   ├── CanvasScrollAnimation.tsx
+  │   ├── ContactSection.tsx
+  │   ├── CustomCursor.tsx
+  │   ├── Footer.tsx
+  │   ├── GlassmorphicCard.tsx
+  │   ├── LoadingScreen.tsx
+  │   ├── ModeNavigation.tsx
+  │   ├── Navbar.tsx
+  │   ├── ParallaxSection.tsx
+  │   ├── ProjectDetails.tsx
+  │   ├── ScrollProgress.tsx
+  │   ├── ScrollTextOverlays.tsx
+  │   ├── SmoothReveal.tsx
+  │   ├── SparkleBackground.tsx
+  │   ├── StorySection.tsx
+  │   ├── Student3D.tsx
+  │   ├── ThemeProvider.tsx
+  │   ├── sections/
+  │   │   ├── AboutSection.tsx
+  │   │   ├── HeroSection.tsx
+  │   │   ├── ProjectCardStack.tsx
+  │   │   └── ProjectsShowcase.tsx
+  │   └── ui/
+  │       ├── ai-image-generator-hero.tsx
+  │       ├── card-stack.tsx
+  │       └── scroll-expansion-hero.tsx
+  │
+  ├── data/
+  │   └── portfolio.ts          (All project data, profile info, achievements)
+  │
+  ├── images/
+  │   ├── algoquest/            (200 JPG frames)
+  │   ├── algoquest-end.webp
+  │   ├── algoquest-video.mp4
+  │   ├── dashboard/            (200 JPG frames)
+  │   ├── dashboard-end.webp
+  │   ├── dashboard-video.mp4
+  │   ├── realestate/           (200 JPG frames)
+  │   ├── realestate-end.webp
+  │   └── realestate-video.mp4
+  │
+  ├── lib/
+  │   └── utils.ts              (Utility functions - cn helper)
+  │
+  ├── public/
+  │   ├── images/               (Symlinked/copied image assets)
+  │   └── resume.pdf
+  │
+  ├── package.json
+  ├── tailwind.config.ts
+  ├── tsconfig.json
+  ├── next.config.mjs
+  └── postcss.config.js
+
+
+12. PERSONAL PROFILE DATA
+--------------------------------------------------------------------------------
+
+  Name         : Hari Teja Patnala
+  Tagline      : Algorithm Engineer & Full-Stack Developer
+  Email        : patnalahariteja@gmail.com
+  Phone        : +91-9392329691
+  LinkedIn     : https://linkedin.com/in/hari-teja-patnala
+  GitHub       : https://github.com/hariteja-01
+  LeetCode     : https://leetcode.com/u/hariteja01
+  University   : Lovely Professional University
+  Degree       : B.Tech CSE | CGPA: 9.18/10
+  Graduation   : Expected Jul 2027
+
+  Achievements :
+    • 900+ LeetCode Problems
+    • IMO State Rank 1
+    • Oracle OCI Certified
+    • MumbaiHacks 2025 Finalist
+    • 9.18 CGPA
+    • NPTEL IIT Madras Certified
+
+  Certifications:
+    • OCI Data Science Professional (Oracle, Nov 2025)
+    • OCI Developer Professional (Oracle, Oct 2025)
+    • Python for Data Science & AI (IBM Coursera, Oct 2025)
+    • Generative AI Essentials (Microsoft & LinkedIn, Jul 2024)
+
+
+================================================================================
+    Generated on: March 4, 2026
+    This file describes every aspect of the HariPortfolio website.
+================================================================================
