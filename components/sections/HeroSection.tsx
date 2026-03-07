@@ -188,7 +188,7 @@ export default function HeroSection() {
                         >
                             I solve hard problems with elegant code.{' '}
                             <span className="font-medium" style={{ color: '#00F0FF' }}>
-                                800+ LeetCode
+                                900+ LeetCode
                             </span>{' '}
                             problems solved.{' '}
                             <span className="font-medium" style={{ color: '#8B5CF6' }}>

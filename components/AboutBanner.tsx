@@ -5,7 +5,7 @@ import { profile } from '@/data/portfolio';
 
 const infoCards = [
     { big: '9.18', label: 'CGPA' },
-    { big: '800+', label: 'LeetCode' },
+    { big: '900+', label: 'LeetCode' },
     { big: '4', label: 'Certifications' },
     { big: '#1', label: 'State Rank (IMO)' },
 ];

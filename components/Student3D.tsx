@@ -55,7 +55,7 @@ export default function Student3D() {
     };
 
     const badges = [
-        { text: '800+ LC', color: '#FFB74D', x: -80, y: -40, delay: 0 },
+        { text: '900+ LC', color: '#FFB74D', x: -80, y: -40, delay: 0 },
         { text: '9.18 CGPA', color: '#00F0FF', x: 90, y: -60, delay: 0.2 },
         { text: 'Oracle Certified', color: '#8B5CF6', x: -90, y: 60, delay: 0.4 },
         { text: 'React + AI', color: '#FF6B35', x: 100, y: 40, delay: 0.6 },

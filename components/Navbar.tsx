@@ -190,10 +190,10 @@ export default function Navbar({
                         )}
                     </motion.button>
 
-                    {/* Sound Toggle */}
+                    {/* Sound Toggle — ambient music */}
                     <motion.button
                         onClick={toggleSound}
-                        title={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+                        title={soundEnabled ? 'Stop ambient music' : 'Play ambient music'}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="hidden sm:flex w-8 h-8 items-center justify-center rounded-full transition-all"
@@ -202,7 +202,7 @@ export default function Navbar({
                             border: soundEnabled ? '1px solid rgba(139,92,246,0.3)' : '1px solid transparent',
                             color: soundEnabled ? '#8B5CF6' : 'var(--text-secondary)',
                         }}
-                        aria-label={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+                        aria-label={soundEnabled ? 'Stop ambient music' : 'Play ambient music'}
                     >
                         {soundEnabled ? (
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -73,7 +73,7 @@ I'm a pre-final year CSE undergrad at Lovely Professional University with a 9.18
 
 > skills --top
 
-800+ problems solved on LeetCode - not for the streak, but because understanding algorithms at a deep level is my idea of fun.
+900+ problems solved on LeetCode - not for the streak, but because understanding algorithms at a deep level is my idea of fun.
 
 > certifications --list
 
@@ -127,7 +127,7 @@ Building the future, one commit at a time.`;
             color: '',
         },
         {
-            value: 800,
+            value: 900,
             decimals: 0,
             suffix: '+',
             prefix: '',

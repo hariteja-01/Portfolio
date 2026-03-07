@@ -105,9 +105,9 @@ export const portfolioModes: PortfolioMode[] = [
                 "AlgoQuest transforms abstract algorithmic concepts into tangible, visual experiences. Watch N-Queens backtrack in real-time. See Trie nodes light up as words are inserted. Observe DP tables fill cell-by-cell with the optimal path highlighted. Built with React Hooks to handle complex state transitions, the platform reduced algorithm learning time by 40%. Features a multi-language code generation engine supporting Python, C++, and JavaScript with real-time performance analytics.",
         },
         storySection: {
-            title: "From 800+ LeetCode Problems to This",
+            title: "From 900+ LeetCode Problems to This",
             description:
-                "After solving over 800 problems on LeetCode and ranking in the top global percentile, I realized that understanding algorithms shouldn't require grinding through text-heavy explanations. AlgoQuest was born from this frustration - every visualization is informed by hundreds of hours of competitive programming. Each algorithm's edge cases, time complexities, and optimization patterns are baked into the learning flow.",
+                "After solving over 900 problems on LeetCode and ranking in the top global percentile, I realized that understanding algorithms shouldn't require grinding through text-heavy explanations. AlgoQuest was born from this frustration - every visualization is informed by hundreds of hours of competitive programming. Each algorithm's edge cases, time complexities, and optimization patterns are baked into the learning flow.",
         },
         ctaSection: {
             primaryText: "View on GitHub",
