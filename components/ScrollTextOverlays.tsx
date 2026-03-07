@@ -186,7 +186,7 @@ export default function ScrollTextOverlays({
                         y: introSubY,
                         textShadow: '0 2px 16px rgba(0,0,0,0.7)',
                     }}
-                    className="text-lg md:text-xl text-gray-300 text-center max-w-md"
+                    className="text-lg md:text-xl text-white/90 text-center max-w-md"
                 >
                     {mode.subName}
                 </motion.p>
@@ -213,7 +213,7 @@ export default function ScrollTextOverlays({
                                 fontSize: 11,
                                 fontWeight: 500,
                                 letterSpacing: 0.5,
-                                color: 'rgba(255,255,255,0.85)',
+                                color: mode.themeColor,
                                 background: `${mode.themeColor}18`,
                                 border: `1px solid ${mode.themeColor}40`,
                                 backdropFilter: 'blur(8px)',
@@ -248,7 +248,7 @@ export default function ScrollTextOverlays({
                     </h2>
                     {section.data.subtitle && (
                         <p
-                            className="text-lg md:text-xl text-gray-300 mt-4 max-w-xl text-center"
+                            className="text-lg md:text-xl text-white/90 mt-4 max-w-xl text-center"
                             style={{ textShadow }}
                         >
                             {section.data.subtitle}

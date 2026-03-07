@@ -18,7 +18,7 @@ export default function ModeNavigation({
 
     return (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
-            <div className="flex items-center gap-3 bg-black/60 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10">
+            <div className="flex items-center gap-3 backdrop-blur-xl rounded-full px-6 py-3" style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 {modes.map((mode, i) => (
                     <div key={mode.id} className="flex items-center gap-3">
                         {/* Dot */}
@@ -46,7 +46,7 @@ export default function ModeNavigation({
                                 <div
                                     className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap pointer-events-none"
                                     style={{
-                                        background: 'rgba(0,0,0,0.9)',
+                                        background: 'var(--bg-primary)',
                                         border: `1px solid ${mode.themeColor}30`,
                                         color: mode.themeColor,
                                     }}
@@ -57,7 +57,7 @@ export default function ModeNavigation({
                                         style={{
                                             borderLeft: '4px solid transparent',
                                             borderRight: '4px solid transparent',
-                                            borderTop: '4px solid rgba(0,0,0,0.9)',
+                                            borderTop: '4px solid var(--bg-primary)',
                                         }}
                                     />
                                 </div>
@@ -66,7 +66,7 @@ export default function ModeNavigation({
 
                         {/* Separator */}
                         {i < modes.length - 1 && (
-                            <div className="w-px h-4 bg-white/10" />
+                            <div className="w-px h-4" style={{ background: 'var(--border-color)' }} />
                         )}
                     </div>
                 ))}

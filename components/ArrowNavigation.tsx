@@ -14,7 +14,8 @@ export default function ArrowNavigation({
             {/* Left Arrow */}
             <button
                 onClick={onPrev}
-                className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/10 hidden md:flex items-center justify-center text-white text-xl opacity-50 hover:opacity-100 hover:bg-white/20 transition-all duration-300"
+                className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full backdrop-blur hidden md:flex items-center justify-center text-xl opacity-50 hover:opacity-100 transition-all duration-300"
+                style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)' }}
                 aria-label="Previous project"
             >
                 ‹
@@ -23,7 +24,8 @@ export default function ArrowNavigation({
             {/* Right Arrow */}
             <button
                 onClick={onNext}
-                className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/10 hidden md:flex items-center justify-center text-white text-xl opacity-50 hover:opacity-100 hover:bg-white/20 transition-all duration-300"
+                className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full backdrop-blur hidden md:flex items-center justify-center text-xl opacity-50 hover:opacity-100 transition-all duration-300"
+                style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', color: 'var(--text-primary)' }}
                 aria-label="Next project"
             >
                 ›

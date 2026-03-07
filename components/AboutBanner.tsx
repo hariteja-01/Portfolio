@@ -14,7 +14,7 @@ const certColors = ['#00F0FF', '#8B5CF6', '#FF6B35', '#FFB74D'];
 
 export default function AboutBanner() {
     return (
-        <section className="py-16 px-6 border-t border-b border-white/5">
+        <section className="py-16 px-6 border-t border-b" style={{ borderColor: 'var(--border-color)' }}>
             {/* Info Cards */}
             <motion.div
                 className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
@@ -26,10 +26,11 @@ export default function AboutBanner() {
                 {infoCards.map((card) => (
                     <div
                         key={card.label}
-                        className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
+                        className="rounded-xl p-4 text-center"
+                        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
                     >
                         <div className="text-3xl font-black text-cyan-400">{card.big}</div>
-                        <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">
+                        <div className="text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--text-secondary)' }}>
                             {card.label}
                         </div>
                     </div>
@@ -42,7 +43,8 @@ export default function AboutBanner() {
                     {[...Array(2)].map((_, rep) => (
                         <span
                             key={rep}
-                            className="text-sm text-gray-500 mx-4 flex-shrink-0"
+                            className="text-sm mx-4 flex-shrink-0"
+                            style={{ color: 'var(--text-secondary)' }}
                         >
                             {profile.achievements.join(' • ')}
                             {' • '}
@@ -56,15 +58,15 @@ export default function AboutBanner() {
                 {profile.certifications.map((cert, i) => (
                     <motion.div
                         key={cert.title}
-                        className="bg-white/5 rounded-r-lg p-3"
-                        style={{ borderLeft: `4px solid ${certColors[i % certColors.length]}` }}
+                        className="rounded-r-lg p-3"
+                        style={{ background: 'var(--bg-card)', borderLeft: `4px solid ${certColors[i % certColors.length]}` }}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: i * 0.1 }}
                         viewport={{ once: true }}
                     >
-                        <div className="text-sm font-medium text-white">{cert.title}</div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{cert.title}</div>
+                        <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                             {cert.issuer} • {cert.date}
                         </div>
                     </motion.div>

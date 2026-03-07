@@ -19,14 +19,14 @@ export default function ProjectDetails({ mode }: ProjectDetailsProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 {/* Left column */}
                 <div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-white">
+                    <h3 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
                         {mode.detailsSection.title}
                     </h3>
                     <div
                         className="h-1 w-16 my-6 rounded-full"
                         style={{ background: mode.themeColor }}
                     />
-                    <p className="text-gray-400 text-lg leading-relaxed">
+                    <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         {mode.detailsSection.description}
                     </p>
 
@@ -52,7 +52,8 @@ export default function ProjectDetails({ mode }: ProjectDetailsProps) {
                     {mode.stats.map((stat) => (
                         <div
                             key={stat.label}
-                            className="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-6 text-center"
+                            className="backdrop-blur rounded-xl p-6 text-center"
+                            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
                         >
                             <div
                                 className="text-3xl md:text-4xl font-black"
@@ -60,7 +61,7 @@ export default function ProjectDetails({ mode }: ProjectDetailsProps) {
                             >
                                 {stat.val}
                             </div>
-                            <div className="text-sm text-gray-500 mt-2">{stat.label}</div>
+                            <div className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
                         </div>
                     ))}
                 </div>

@@ -20,10 +20,10 @@ export default function StorySection({ mode }: StorySectionProps) {
                 className="pl-8"
                 style={{ borderLeft: `4px solid ${mode.themeColor}` }}
             >
-                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
                     {mode.storySection.title}
                 </h3>
-                <p className="text-gray-400 text-lg leading-relaxed mt-4">
+                <p className="text-lg leading-relaxed mt-4" style={{ color: 'var(--text-secondary)' }}>
                     {mode.storySection.description}
                 </p>
             </div>

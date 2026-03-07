@@ -24,7 +24,7 @@ export default function CTASection({
             viewport={{ once: true, amount: 0.3 }}
         >
             {/* Tagline */}
-            <p className="text-xl text-gray-400 italic mb-8">
+            <p className="text-xl italic mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {mode.ctaSection.tagline}
             </p>
 
@@ -72,7 +72,10 @@ export default function CTASection({
                     href={profile.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="transition-colors text-sm"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                 >
                     GitHub
                 </a>
@@ -80,13 +83,19 @@ export default function CTASection({
                     href={profile.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="transition-colors text-sm"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                 >
                     LinkedIn
                 </a>
                 <a
                     href={`mailto:${profile.email}`}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="transition-colors text-sm"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                 >
                     Email
                 </a>
@@ -96,13 +105,13 @@ export default function CTASection({
             {!isLast && (
                 <button
                     onClick={onNextProject}
-                    className="mt-16 text-2xl font-bold text-white cursor-pointer hover:transition-colors duration-300 group"
-                    style={{ borderBottom: `2px solid ${mode.themeColor}` }}
+                    className="mt-16 text-2xl font-bold cursor-pointer hover:transition-colors duration-300 group"
+                    style={{ color: 'var(--text-primary)', borderBottom: `2px solid ${mode.themeColor}` }}
                     onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.color = mode.themeColor;
                     }}
                     onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = 'white';
+                        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
                     }}
                 >
                     Next Project →

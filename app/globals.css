@@ -70,6 +70,22 @@ body {
   color: white;
 }
 
+.light-mode ::selection {
+  background: rgba(139, 92, 246, 0.25);
+  color: #1D1D1F;
+}
+
+/* Light mode placeholder styling */
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+  color: #86868B;
+}
+
+/* Light mode scrollbar */
+.light-mode ::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+}
+
 html {
   scroll-behavior: smooth;
 }
