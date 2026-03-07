@@ -26,7 +26,15 @@ export interface PortfolioMode {
 
 export const profile = {
     name: "Hari Teja Patnala",
-    tagline: "Algorithm Systems Engineer & AI Architect",
+    tagline: "SDE | ML Engineer | AI Architect",
+    roles: [
+        "Software Development Engineer",
+        "Machine Learning Engineer",
+        "AI Architect",
+        "Full Stack Developer",
+        "Algorithm Specialist",
+        "Cloud Engineer",
+    ],
     email: "patnalahariteja@gmail.com",
     phone: "+91-9392329691",
     linkedin: "https://linkedin.com/in/hari-teja-patnala",

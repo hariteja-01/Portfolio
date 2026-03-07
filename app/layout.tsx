@@ -11,11 +11,11 @@ const BASE_URL = 'https://hariteja.dev';
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
     title: {
-        default: "Hari Teja Patnala | Algorithm Systems Engineer & AI Architect",
+        default: "Hari Teja Patnala | SDE, ML Engineer, AI Architect",
         template: "%s | Hari Teja Patnala",
     },
     description:
-        "Algorithm Systems Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified. Building intelligent systems at the intersection of algorithms, ML, and high-performance web engineering.",
+        "SDE, ML Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified. Building intelligent systems at the intersection of algorithms, ML, and high-performance web engineering.",
     keywords: [
         'Algorithm Engineer', 'AI Architect', 'Full Stack Developer',
         'Machine Learning', 'React', 'Next.js', 'LeetCode', 'Oracle Cloud',
@@ -27,16 +27,16 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_US',
         url: BASE_URL,
-        title: 'Hari Teja Patnala | Algorithm Systems Engineer & AI Architect',
+        title: 'Hari Teja Patnala | SDE, ML Engineer, AI Architect',
         description:
-            'Algorithm Systems Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified. Building intelligent systems at the intersection of algorithms, ML, and modern web engineering.',
+            'SDE, ML Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified. Building intelligent systems at the intersection of algorithms, ML, and modern web engineering.',
         siteName: 'Hari Teja Patnala Portfolio',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Hari Teja Patnala | Algorithm Systems Engineer & AI Architect',
+        title: 'Hari Teja Patnala | SDE, ML Engineer, AI Architect',
         description:
-            'Algorithm Systems Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified.',
+            'SDE, ML Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified.',
         creator: '@hariteja01',
     },
     robots: {
@@ -50,8 +50,8 @@ const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Hari Teja Patnala',
-    jobTitle: 'Algorithm Systems Engineer & AI Architect',
-    description: 'Algorithm Systems Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified.',
+    jobTitle: 'SDE, ML Engineer & AI Architect',
+    description: 'SDE, ML Engineer & AI Architect - 900+ LeetCode problems, Oracle Cloud certified.',
     url: BASE_URL,
     sameAs: [
         'https://linkedin.com/in/hari-teja-patnala',

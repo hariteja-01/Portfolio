@@ -29,7 +29,7 @@ import { useExperience } from '@/components/ExperienceContext';
 type ViewState = 'landing' | 'deepdive';
 
 // Base page title
-const BASE_TITLE = 'Hari Teja Patnala | Algorithm Systems Engineer & AI Architect';
+const BASE_TITLE = 'Hari Teja Patnala | SDE, ML Engineer, AI Architect';
 
 export default function Home() {
     const [viewState, setViewState] = useState<ViewState>('landing');

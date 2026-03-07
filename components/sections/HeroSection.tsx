@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { profile } from '@/data/portfolio';
@@ -11,6 +11,68 @@ const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 // Import Hero animation
 import heroAnimation from '@/public/Hero.json';
+
+// ─── Animated Role Rotator (typewriter + gradient) ──────────────────
+function RoleRotator({ roles }: { roles: string[] }) {
+    const [roleIdx, setRoleIdx] = useState(0);
+    const [text, setText] = useState('');
+    const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing');
+
+    useEffect(() => {
+        const currentRole = roles[roleIdx];
+
+        if (phase === 'typing') {
+            if (text.length < currentRole.length) {
+                const t = setTimeout(() => {
+                    setText(currentRole.slice(0, text.length + 1));
+                }, 65 + Math.random() * 40);
+                return () => clearTimeout(t);
+            }
+            // Done typing — pause
+            const t = setTimeout(() => setPhase('pausing'), 2200);
+            return () => clearTimeout(t);
+        }
+
+        if (phase === 'pausing') {
+            setPhase('deleting');
+            return;
+        }
+
+        if (phase === 'deleting') {
+            if (text.length > 0) {
+                const t = setTimeout(() => {
+                    setText(text.slice(0, -1));
+                }, 30);
+                return () => clearTimeout(t);
+            }
+            // Done deleting — next role
+            setRoleIdx((prev) => (prev + 1) % roles.length);
+            setPhase('typing');
+        }
+    }, [text, phase, roleIdx, roles]);
+
+    return (
+        <span className="inline-flex items-center min-h-[1.5em]">
+            <span
+                className="font-medium bg-clip-text text-transparent"
+                style={{
+                    backgroundImage: 'linear-gradient(90deg, #00F0FF, #8B5CF6, #FF6B35)',
+                    backgroundSize: '200% 100%',
+                    animation: 'gradient-shift 4s ease infinite',
+                }}
+            >
+                {text}
+            </span>
+            <span
+                className="inline-block w-[3px] h-[1.2em] ml-0.5 rounded-sm"
+                style={{
+                    background: 'linear-gradient(180deg, #00F0FF, #8B5CF6)',
+                    animation: 'cursor-blink 0.7s step-end infinite',
+                }}
+            />
+        </span>
+    );
+}
 
 export default function HeroSection() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -167,16 +229,16 @@ export default function HeroSection() {
                             </div>
                         </div>
 
-                        {/* Role */}
-                        <motion.p
+                        {/* Role — Animated Typewriter */}
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.8 }}
                             className="text-xl md:text-2xl font-light mt-6"
                             style={{ color: 'var(--text-secondary)' }}
                         >
-                            {profile.tagline}
-                        </motion.p>
+                            <RoleRotator roles={profile.roles} />
+                        </motion.div>
 
                         {/* Description */}
                         <motion.p
