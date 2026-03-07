@@ -79,7 +79,18 @@ export default function Navbar({
                 }}
             >
                 {/* Logo - Theme aware */}
-                <a href="#hero" className="flex items-center gap-1.5 group">
+                <a
+                    href="#hero"
+                    className="flex items-center gap-1.5 group"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        if (showProjectView && onBackToPortfolio) {
+                            onBackToPortfolio();
+                        } else {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }}
+                >
                     <Image
                         src={theme === 'dark' ? '/black_logo.svg' : '/l1.png'}
                         alt="HTP Logo"

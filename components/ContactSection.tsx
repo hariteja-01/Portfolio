@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
-import { profile } from '@/data/portfolio';
 import GlassmorphicCard from '@/components/GlassmorphicCard';
+import emailjs from '@emailjs/browser';
 
 // Dynamically import Lottie to avoid SSR issues
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
@@ -16,13 +16,37 @@ export default function ContactSection() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        subject: '',
         message: '',
     });
+    const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const mailtoLink = `mailto:${profile.email}?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}`;
-        window.open(mailtoLink, '_blank');
+
+        setStatus('sending');
+
+        emailjs
+            .send(
+                'service_irddtaj',
+                'template_qlcfc08',
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                },
+                'ofRC8JbWo4PRvixus'
+            )
+            .then(() => {
+                setStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setStatus('idle'), 4000);
+            })
+            .catch(() => {
+                setStatus('error');
+                setTimeout(() => setStatus('idle'), 4000);
+            });
     };
 
     return (
@@ -133,6 +157,25 @@ export default function ContactSection() {
                                         e.currentTarget.style.borderColor = 'var(--border-color)';
                                     }}
                                 />
+                                <input
+                                    type="text"
+                                    placeholder="Subject"
+                                    value={formData.subject}
+                                    onChange={(e) =>
+                                        setFormData((f) => ({ ...f, subject: e.target.value }))
+                                    }
+                                    className="w-full bg-transparent py-3 outline-none transition-colors"
+                                    style={{
+                                        borderBottom: '1px solid var(--border-color)',
+                                        color: 'var(--text-primary)',
+                                    }}
+                                    onFocus={(e) => {
+                                        e.currentTarget.style.borderColor = '#00F0FF';
+                                    }}
+                                    onBlur={(e) => {
+                                        e.currentTarget.style.borderColor = 'var(--border-color)';
+                                    }}
+                                />
                                 <textarea
                                     placeholder="Tell me about your project..."
                                     rows={4}
@@ -154,9 +197,14 @@ export default function ContactSection() {
                                 />
                                 <button
                                     type="submit"
-                                    className="w-full py-4 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99]"
+                                    disabled={status === 'sending'}
+                                    className="w-full py-4 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
                                     style={{
-                                        background: 'linear-gradient(135deg, #00F0FF, #8B5CF6)',
+                                        background: status === 'success'
+                                            ? 'linear-gradient(135deg, #10B981, #059669)'
+                                            : status === 'error'
+                                            ? 'linear-gradient(135deg, #EF4444, #DC2626)'
+                                            : 'linear-gradient(135deg, #00F0FF, #8B5CF6)',
                                         boxShadow: '0 4px 20px rgba(0,240,255,0.2)',
                                     }}
                                     onMouseEnter={(e) => {
@@ -168,7 +216,13 @@ export default function ContactSection() {
                                             '0 4px 20px rgba(0,240,255,0.2)';
                                     }}
                                 >
-                                    Send Message →
+                                    {status === 'sending'
+                                        ? 'Sending...'
+                                        : status === 'success'
+                                        ? '✓ Message Sent!'
+                                        : status === 'error'
+                                        ? 'Failed — Try Again'
+                                        : 'Send Message →'}
                                 </button>
                             </form>
                         </GlassmorphicCard>
