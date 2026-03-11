@@ -27,7 +27,7 @@ const S: AmbientState = {
 
 const FADE_IN = 5.0;   // slow cinematic entrance
 const FADE_OUT = 4.0;
-const VOL = 0.055;
+const VOL = 1.0;       // full scale — let the OS system volume control loudness
 
 // ─── Interstellar Main Theme progression ────────────────────────────
 // Am → Am/G# → C/G → Fmaj7 → Dm7 → E7sus4 → Am
