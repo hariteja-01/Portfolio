@@ -26,8 +26,8 @@ export default function CustomCursor() {
     );
     const rafId = useRef(0);
     const [isMobile, setIsMobile] = useState(true);
-    const cursorStateRef = useRef<'default' | 'pointer' | 'project' | 'wave'>('default');
-    const [cursorState, setCursorState] = useState<'default' | 'pointer' | 'project' | 'wave'>('default');
+    const cursorStateRef = useRef<'default' | 'project' | 'wave'>('default');
+    const [cursorState, setCursorState] = useState<'default' | 'project' | 'wave'>('default');
     const isMoving = useRef(false);
     const moveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -47,7 +47,7 @@ export default function CustomCursor() {
         moveTimer.current = setTimeout(() => { isMoving.current = false; }, 100);
     }, []);
 
-    const updateCursorState = useCallback((state: 'default' | 'pointer' | 'project' | 'wave') => {
+    const updateCursorState = useCallback((state: 'default' | 'project' | 'wave') => {
         if (cursorStateRef.current !== state) {
             cursorStateRef.current = state;
             setCursorState(state);
@@ -64,7 +64,7 @@ export default function CustomCursor() {
         const dataCursor = el.getAttribute('data-cursor');
         if (dataCursor === 'project') updateCursorState('project');
         else if (dataCursor === 'wave') updateCursorState('wave');
-        else updateCursorState('pointer');
+        else updateCursorState('default');
     }, [updateCursorState]);
 
     const handleMouseOut = useCallback((e: MouseEvent) => {
@@ -114,7 +114,6 @@ export default function CustomCursor() {
                 const scale =
                     state === 'project' ? 2.4
                     : state === 'wave' ? 1.8
-                    : state === 'pointer' ? 1.5
                     : 1;
                 ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%) scale(${scale})`;
             }
@@ -156,7 +155,7 @@ export default function CustomCursor() {
 
     if (isMobile) return null;
 
-    const isHovering = cursorState !== 'default';
+    const isHovering = cursorState === 'project' || cursorState === 'wave';
 
     return (
         <>
