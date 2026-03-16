@@ -11,6 +11,15 @@ interface NavbarProps {
     onBackToPortfolio?: () => void;
 }
 
+const NAV_LINKS = [
+    { label: 'Home', href: '#hero' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Certifications', href: '#certifications' },
+    { label: 'Contact', href: '#contact' },
+];
+
 export default function Navbar({
     showProjectView = false,
     onBackToPortfolio,
@@ -29,41 +38,58 @@ export default function Navbar({
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Intersection observer for active section
+    // Scroll-spy for active section indicator
     useEffect(() => {
         if (showProjectView) return;
-        const sections = ['hero', 'about', 'projects', 'contact'];
-        const observers: IntersectionObserver[] = [];
+        const sectionIds = NAV_LINKS.map((link) => link.href.replace('#', ''));
 
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(id);
-                    }
-                },
-                { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' }
-            );
-            observer.observe(el);
-            observers.push(observer);
-        });
+        const updateActiveSection = () => {
+            const markerY = window.innerHeight * 0.33;
+            let current = sectionIds[0];
 
-        return () => observers.forEach((o) => o.disconnect());
+            for (const id of sectionIds) {
+                const section = document.getElementById(id);
+                if (!section) continue;
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= markerY) {
+                    current = id;
+                }
+            }
+
+            // Ensure contact is active near the absolute page bottom.
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 8) {
+                current = 'contact';
+            }
+
+            setActiveSection(current);
+        };
+
+        updateActiveSection();
+        window.addEventListener('scroll', updateActiveSection, { passive: true });
+        window.addEventListener('resize', updateActiveSection);
+
+        return () => {
+            window.removeEventListener('scroll', updateActiveSection);
+            window.removeEventListener('resize', updateActiveSection);
+        };
     }, [showProjectView]);
 
-    const navLinks = [
-        { label: 'Home', href: '#hero' },
-        { label: 'About', href: '#about' },
-        { label: 'Projects', href: '#projects' },
-        { label: 'Contact', href: '#contact' },
-    ];
+    const handleNavClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        event.preventDefault();
+        const id = href.replace('#', '');
+        setActiveSection(id);
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, []);
 
     const handleMobileNav = (href: string) => {
         setMobileMenuOpen(false);
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        const id = href.replace('#', '');
+        setActiveSection(id);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     return (
@@ -104,10 +130,11 @@ export default function Navbar({
                 {/* Center nav links (desktop only, VIEW 1) */}
                 {!showProjectView && (
                     <div className="hidden md:flex items-center gap-6">
-                        {navLinks.map((link) => (
+                        {NAV_LINKS.map((link) => (
                             <a
                                 key={link.label}
                                 href={link.href}
+                                onClick={(event) => handleNavClick(event, link.href)}
                                 className="text-sm font-medium transition-colors relative"
                                 style={{
                                     color:
@@ -359,7 +386,7 @@ export default function Navbar({
                         </button>
                         {/* Links */}
                         <div className="flex flex-col items-center gap-8">
-                            {navLinks.map((link, i) => (
+                            {NAV_LINKS.map((link, i) => (
                                 <motion.button
                                     key={link.label}
                                     initial={{ opacity: 0, y: 20 }}

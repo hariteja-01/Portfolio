@@ -471,7 +471,7 @@ mutually exclusive "view states", animated with Framer Motion's AnimatePresence:
                  performance analytics.
     Story      : Born from 800+ LeetCode problems — every visualization is
                  informed by hundreds of hours of competitive programming.
-    GitHub     : https://github.com/hariteja-01/algoquest
+    GitHub     : https://github.com/hariteja-01/AlgoQuest
 
 7.2 AI Game Tester — Gemini-Powered Dashboard
     Role       : AI Engineer
@@ -486,7 +486,7 @@ mutually exclusive "view states", animated with Framer Motion's AnimatePresence:
                  usage and FPS stability.
     Story      : Pushes beyond traditional dashboards — this one understands
                  data through Gemini's multimodal capabilities.
-    GitHub     : https://github.com/hariteja-01/ai-game-dashboard
+    GitHub     : https://github.com/hariteja-01/Game-Tester-Using-AI
 
 7.3 Property Oracle — ML Analytics Engine
     Role       : Data Scientist
@@ -501,7 +501,7 @@ mutually exclusive "view states", animated with Framer Motion's AnimatePresence:
                  reveal regional pricing trends.
     Story      : Combines Data Science background with Financial Markets
                  knowledge for market sentiment and temporal trend analysis.
-    GitHub     : https://github.com/hariteja-01/real-estate-ml
+    GitHub     : https://github.com/hariteja-01/House-Price-Predictor
 
 
 8. ANIMATIONS & MICRO-INTERACTIONS INVENTORY

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { profile } from '@/data/portfolio';
 import GlassmorphicCard from '@/components/GlassmorphicCard';
 
 function AnimatedCounter({
@@ -159,10 +158,8 @@ Building the future, one commit at a time.`;
         },
     ];
 
-    const certColors = ['#00F0FF', '#8B5CF6', '#FF6B35', '#FFB74D'];
-
     return (
-        <section id="about" className="py-32 px-6">
+        <section id="about" className="py-24 px-6">
             <div className="max-w-6xl mx-auto">
                 <motion.h2
                     className="text-3xl md:text-4xl font-bold mb-12"
@@ -208,8 +205,8 @@ Building the future, one commit at a time.`;
                         <div
                             className="p-6 font-mono text-sm leading-relaxed overflow-auto"
                             style={{
-                                background: 'var(--bg-primary)',
-                                color: '#4ADE80',
+                                background: 'linear-gradient(180deg, #0B1220 0%, #111827 100%)',
+                                color: '#86EFAC',
                                 maxHeight: 420,
                                 minHeight: 380,
                             }}
@@ -288,52 +285,6 @@ Building the future, one commit at a time.`;
                     </div>
                 </div>
 
-                {/* Achievements marquee */}
-                <div className="overflow-hidden mt-16 max-w-4xl mx-auto">
-                    <div className="animate-marquee flex whitespace-nowrap">
-                        {[...Array(2)].map((_, rep) => (
-                            <span
-                                key={rep}
-                                className="text-sm mx-4 flex-shrink-0"
-                                style={{ color: 'var(--text-secondary)' }}
-                            >
-                                {profile.achievements.join(' • ')}
-                                {' • '}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Certifications */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 max-w-4xl mx-auto mt-8">
-                    {profile.certifications.map((cert, i) => (
-                        <motion.div
-                            key={cert.title}
-                            className="rounded-r-lg p-3"
-                            style={{
-                                background: 'var(--bg-card)',
-                                borderLeft: `4px solid ${certColors[i % certColors.length]}`,
-                            }}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: i * 0.1 }}
-                            viewport={{ once: true }}
-                        >
-                            <div
-                                className="text-sm font-medium"
-                                style={{ color: 'var(--text-primary)' }}
-                            >
-                                {cert.title}
-                            </div>
-                            <div
-                                className="text-xs"
-                                style={{ color: 'var(--text-secondary)' }}
-                            >
-                                {cert.issuer} • {cert.date}
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
             </div>
         </section>
     );

@@ -23,13 +23,13 @@ Use this file to generate a premium 10-12 slide presentation directly from my re
 - Portfolio projects:
   - AlgoQuest (React.js, TypeScript, Tailwind CSS, HTML5)
     - Impact: 40% learning boost, 15+ algorithms, 3 code languages
-    - GitHub: https://github.com/hariteja-01/algoquest
+    - GitHub: https://github.com/hariteja-01/AlgoQuest
   - AI Game Tester (Python, Streamlit, Gemini API, Plotly)
     - Impact: 700+ games parsed, under 2 seconds response
-    - GitHub: https://github.com/hariteja-01/ai-game-dashboard
+    - GitHub: https://github.com/hariteja-01/Game-Tester-Using-AI
   - Real Estate House Price Predictor (Python, XGBoost, Scikit-learn, Streamlit, Folium, SHAP)
     - Impact: 92% accuracy, 80K+ records, 20 years data span
-    - GitHub: https://github.com/hariteja-01/real-estate-ml
+    - GitHub: https://github.com/hariteja-01/House-Price-Predictor
 - Contact links:
   - Email: patnalahariteja@gmail.com
   - LinkedIn: https://linkedin.com/in/hari-teja-patnala
@@ -90,15 +90,15 @@ My verified portfolio data (single source of truth):
 - Project 1: AlgoQuest
   - Tech: React.js, TypeScript, Tailwind CSS, HTML5
   - Metrics: 40% learning boost, 15+ algorithms, 3 code languages
-  - GitHub: https://github.com/hariteja-01/algoquest
+  - GitHub: https://github.com/hariteja-01/AlgoQuest
 - Project 2: AI Game Tester
   - Tech: Python, Streamlit, Gemini API, Plotly
   - Metrics: 700+ games parsed, under 2 seconds response
-  - GitHub: https://github.com/hariteja-01/ai-game-dashboard
+  - GitHub: https://github.com/hariteja-01/Game-Tester-Using-AI
 - Project 3: Real Estate House Price Predictor
   - Tech: Python, XGBoost, Scikit-learn, Streamlit, Folium, SHAP
   - Metrics: 92% accuracy, 80K+ records, 20 years data
-  - GitHub: https://github.com/hariteja-01/real-estate-ml
+  - GitHub: https://github.com/hariteja-01/House-Price-Predictor
 - Contact: patnalahariteja@gmail.com, LinkedIn, GitHub, LeetCode
 - Resume: downloadable PDF exists
 
@@ -176,17 +176,17 @@ Projects:
 1) AlgoQuest
 - React.js, TypeScript, Tailwind CSS
 - 40% learning boost, 15+ algorithms, 3 code languages
-- GitHub: https://github.com/hariteja-01/algoquest
+- GitHub: https://github.com/hariteja-01/AlgoQuest
 
 2) AI Game Tester
 - Python, Streamlit, Gemini API, Plotly
 - 700+ games parsed, under 2s response
-- GitHub: https://github.com/hariteja-01/ai-game-dashboard
+- GitHub: https://github.com/hariteja-01/Game-Tester-Using-AI
 
 3) Real Estate House Price Predictor
 - Python, XGBoost, Scikit-learn, SHAP, Folium
 - 92% accuracy, 80K+ records, 20 years data
-- GitHub: https://github.com/hariteja-01/real-estate-ml
+- GitHub: https://github.com/hariteja-01/House-Price-Predictor
 
 Include slides for:
 - Intro summary

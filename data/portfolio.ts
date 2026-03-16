@@ -27,6 +27,21 @@ export interface PortfolioMode {
 export const profile = {
     name: "Hari Teja Patnala",
     tagline: "SDE | ML Engineer | AI Architect",
+    skills: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "JavaScript",
+        "C++",
+        "Python",
+        "Machine Learning",
+        "Data Science",
+        "Tailwind CSS",
+        "Node.js",
+        "Cloud (Oracle OCI)",
+        "Algorithms & DSA",
+        "Generative AI",
+    ],
     roles: [
         "Software Development Engineer",
         "Machine Learning Engineer",
@@ -56,21 +71,29 @@ export const profile = {
             title: "OCI Data Science Professional",
             issuer: "Oracle",
             date: "Nov 2025",
+            issuedAt: "2025-11",
+            certificationsUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=D882C1B1345014E818023BEA9942D34A9718ADCF28204E34ED158FBBF1D1A1D9",
         },
         {
             title: "OCI Developer Professional",
             issuer: "Oracle",
             date: "Oct 2025",
+            issuedAt: "2025-10",
+            certificationsUrl: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4369BADDBECEC87FFAB7AC3633A7E8317399BBDC123D9E734B553EA4A0431569",
         },
         {
             title: "Python for Data Science & AI",
             issuer: "IBM Coursera",
             date: "Oct 2025",
+            issuedAt: "2025-10",
+            certificationsUrl: "https://www.coursera.org/account/accomplishments/verify/SF891HUZCUPO",
         },
         {
             title: "Generative AI Essentials",
             issuer: "Microsoft & LinkedIn",
             date: "Jul 2024",
+            issuedAt: "2024-07",
+            certificationsUrl: "https://www.linkedin.com/learning/certificates/88a0488c7323d1f8c05da9b8501076b549e8b9c573592a7023fb007948e60f8c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPV%2FFjUW0S1SH%2FKNxFUstUw%3D%3D",
         },
     ],
 };
@@ -119,7 +142,7 @@ export const portfolioModes: PortfolioMode[] = [
         },
         ctaSection: {
             primaryText: "View on GitHub",
-            primaryUrl: "https://github.com/hariteja-01/algoquest",
+            primaryUrl: "https://github.com/hariteja-01/AlgoQuest",
             highlights: ["React + TypeScript", "15+ Algorithms", "Real-time Analytics"],
             tagline: "Where theory meets visualization.",
         },
@@ -170,7 +193,7 @@ export const portfolioModes: PortfolioMode[] = [
         },
         ctaSection: {
             primaryText: "View on GitHub",
-            primaryUrl: "https://github.com/hariteja-01/ai-game-dashboard",
+            primaryUrl: "https://github.com/hariteja-01/Game-Tester-Using-AI",
             highlights: ["Gemini API", "Multimodal AI", "Real-time Monitoring"],
             tagline: "AI-powered debugging for the modern game studio.",
         },
@@ -225,7 +248,7 @@ export const portfolioModes: PortfolioMode[] = [
         },
         ctaSection: {
             primaryText: "View on GitHub",
-            primaryUrl: "https://github.com/hariteja-01/real-estate-ml",
+            primaryUrl: "https://github.com/hariteja-01/House-Price-Predictor",
             highlights: ["92% Accuracy", "SHAP Analysis", "Geospatial Maps"],
             tagline: "Predict property values with ML precision.",
         },

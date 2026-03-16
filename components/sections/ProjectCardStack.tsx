@@ -92,7 +92,7 @@ function VideoCard({
             <div
                 className="absolute inset-0 transition-opacity duration-500"
                 style={{
-                    background: `linear-gradient(to top, ${item.themeColor}90 0%, rgba(0,0,0,0.4) 40%, transparent 70%)`,
+                    background: `linear-gradient(to top, ${item.themeColor}95 0%, rgba(0,0,0,0.62) 45%, rgba(0,0,0,0.24) 75%)`,
                     opacity: active ? (isHovering ? 0.9 : 0.7) : 0.5,
                 }}
             />
@@ -142,6 +142,7 @@ function VideoCard({
                                 style={{
                                     background: 'rgba(255,255,255,0.1)',
                                     backdropFilter: 'blur(4px)',
+                                    textShadow: '0 1px 10px rgba(0,0,0,0.6)',
                                 }}
                             >
                                 {tech}
@@ -149,10 +150,10 @@ function VideoCard({
                         ))}
                     </div>
 
-                    <div className="text-xl font-bold text-white drop-shadow-lg">
+                    <div className="text-xl font-bold text-white drop-shadow-lg" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.78)' }}>
                         {item.title}
                     </div>
-                    <div className="text-sm text-white/70 mt-0.5">
+                    <div className="text-sm text-white/85 mt-0.5" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.72)' }}>
                         {item.description}
                     </div>
 
@@ -172,7 +173,7 @@ function VideoCard({
                                 >
                                     {stat.val}
                                 </div>
-                                <div className="text-[10px] text-white/50 uppercase tracking-wider">
+                                <div className="text-[10px] text-white/70 uppercase tracking-wider" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.65)' }}>
                                     {stat.label}
                                 </div>
                             </div>

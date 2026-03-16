@@ -10,7 +10,7 @@ export default function AnimatedSectionDivider({
     color = '#00F0FF',
 }: AnimatedSectionDividerProps) {
     return (
-        <div className="py-8 flex justify-center items-center" aria-hidden="true">
+        <div className="py-5 flex justify-center items-center" aria-hidden="true">
             <div className="relative w-full max-w-2xl h-px overflow-visible">
                 {/* Base glow line */}
                 <div

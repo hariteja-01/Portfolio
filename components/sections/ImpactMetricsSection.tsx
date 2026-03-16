@@ -90,7 +90,7 @@ const metricGroups = [
 // ─── Main Section ─────────────────────────────────────────────────────
 export default function ImpactMetricsSection() {
     return (
-        <section id="impact" className="py-24 px-6" aria-label="Impact and performance metrics">
+        <section id="impact" className="py-20 px-6" aria-label="Impact and performance metrics">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <motion.div
@@ -129,11 +129,23 @@ export default function ImpactMetricsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: gi * 0.12 }}
                             viewport={{ once: true }}
+                            whileHover={{ y: -6, scale: 1.02 }}
                             className="rounded-2xl p-6 flex flex-col gap-5"
                             style={{
                                 background: group.gradient,
                                 border: `1px solid ${group.border}`,
                                 backdropFilter: 'blur(20px)',
+                                boxShadow: `0 10px 30px ${group.color}18`,
+                            }}
+                            onMouseEnter={(e) => {
+                                const el = e.currentTarget as HTMLDivElement;
+                                el.style.borderColor = `${group.color}80`;
+                                el.style.boxShadow = `0 18px 45px ${group.color}35, inset 0 0 22px ${group.color}25`;
+                            }}
+                            onMouseLeave={(e) => {
+                                const el = e.currentTarget as HTMLDivElement;
+                                el.style.borderColor = group.border;
+                                el.style.boxShadow = `0 10px 30px ${group.color}18`;
                             }}
                         >
                             {/* Project label */}

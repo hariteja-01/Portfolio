@@ -236,9 +236,9 @@ const ScrollExpandMedia = ({
                                                 key={tech}
                                                 className='px-2.5 py-0.5 rounded-full text-[10px] font-medium'
                                                 style={{
-                                                    color: 'rgba(255,255,255,0.75)',
-                                                    background: `${themeColor}12`,
-                                                    border: `1px solid ${themeColor}30`,
+                                                    color: 'var(--text-primary)',
+                                                    background: `${themeColor}16`,
+                                                    border: `1px solid ${themeColor}45`,
                                                 }}
                                             >
                                                 {tech}

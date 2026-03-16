@@ -15,9 +15,11 @@ import ModeNavigation from '@/components/ModeNavigation';
 import ArrowNavigation from '@/components/ArrowNavigation';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
+import SkillsSection from '@/components/sections/SkillsSection';
 import ProjectCardStack from '@/components/sections/ProjectCardStack';
 import ImpactMetricsSection from '@/components/sections/ImpactMetricsSection';
 import EngineeringPhilosophySection from '@/components/sections/EngineeringPhilosophySection';
+import CertificationSection from '@/components/sections/CertificationSection';
 import CustomCursor from '@/components/CustomCursor';
 import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -37,6 +39,24 @@ export default function Home() {
     const scrollWrapperRef = useRef<HTMLDivElement>(null);
     const currentMode = portfolioModes[currentIndex];
     const { experienceMode, soundEnabled } = useExperience();
+
+    // Always start at top on hard refresh or page restore.
+    useEffect(() => {
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+
+        const resetScroll = () => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+        };
+
+        resetScroll();
+        window.addEventListener('pageshow', resetScroll);
+
+        return () => {
+            window.removeEventListener('pageshow', resetScroll);
+        };
+    }, []);
 
     // ── Dynamic page title ──────────────────────────────────────────────
     useEffect(() => {
@@ -115,6 +135,9 @@ export default function Home() {
                         <AnimatedSectionDivider color="#00F0FF" />
                         <AboutSection />
 
+                        <AnimatedSectionDivider color="#FF6B35" />
+                        <SkillsSection />
+
                         <AnimatedSectionDivider color="#8B5CF6" />
                         <ImpactMetricsSection />
 
@@ -123,6 +146,9 @@ export default function Home() {
 
                         <AnimatedSectionDivider color="#00F0FF" />
                         <ProjectCardStack onProjectSelect={handleProjectSelect} />
+
+                        <AnimatedSectionDivider color="#8B5CF6" />
+                        <CertificationSection />
 
                         <AnimatedSectionDivider color="#8B5CF6" />
                         <ContactSection />

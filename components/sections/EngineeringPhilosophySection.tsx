@@ -67,7 +67,7 @@ export default function EngineeringPhilosophySection() {
     return (
         <section
             id="philosophy"
-            className="py-24 px-6"
+            className="py-20 px-6"
             aria-label="Engineering philosophy"
         >
             <div className="max-w-6xl mx-auto">

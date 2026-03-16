@@ -101,9 +101,9 @@ export default function ProjectIntroSection({ mode }: ProjectIntroSectionProps) 
                         transition={{ duration: 0.35, delay: 0.75 + i * 0.07, ease: 'easeOut' }}
                         className="px-3.5 py-1 rounded-full text-xs font-medium"
                         style={{
-                            color: 'rgba(255,255,255,0.85)',
-                            background: `${mode.themeColor}15`,
-                            border: `1px solid ${mode.themeColor}35`,
+                            color: 'var(--text-primary)',
+                            background: `${mode.themeColor}18`,
+                            border: `1px solid ${mode.themeColor}45`,
                         }}
                     >
                         {tech}
@@ -120,7 +120,7 @@ export default function ProjectIntroSection({ mode }: ProjectIntroSectionProps) 
             >
                 <span
                     className="text-[10px] uppercase tracking-[3px] font-mono"
-                    style={{ color: 'var(--text-tertiary, rgba(255,255,255,0.35))' }}
+                    style={{ color: 'var(--text-secondary)' }}
                 >
                     Scroll to explore
                 </span>
