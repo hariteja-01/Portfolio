@@ -1,16 +1,10 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import { useRef, useState, useEffect, useId } from 'react';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { profile } from '@/data/portfolio';
 import SparkleBackground from '@/components/SparkleBackground';
-
-// Dynamically import Lottie to avoid SSR issues
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-
-// Import Hero animation
-import heroAnimation from '@/public/Hero.json';
 
 // ─── Animated Role Rotator (typewriter + gradient) ──────────────────
 function RoleRotator({ roles }: { roles: string[] }) {
@@ -78,6 +72,7 @@ export default function HeroSection() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
     const scrollIndicatorOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+    const frameGradientId = useId().replace(/:/g, '');
 
     const firstLine = 'Hari Teja';
     const secondLine = 'Patnala';
@@ -337,32 +332,76 @@ export default function HeroSection() {
                         </motion.div>
                     </div>
 
-                    {/* Right: Hero Lottie Animation */}
+                    {/* Right: Hero Portrait */}
                     <motion.div
-                        className="lg:col-span-2 hidden lg:flex items-center justify-center relative"
-                        style={{ height: 480 }}
+                        className="lg:col-span-2 flex items-center justify-center relative min-h-[420px] lg:min-h-[560px]"
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
                     >
-                        {/* Glow effect behind animation */}
-                        <div
-                            className="absolute inset-0 rounded-full blur-3xl opacity-20 pointer-events-none"
-                            style={{
-                                background: 'radial-gradient(circle, rgba(0,240,255,0.3) 0%, rgba(139,92,246,0.2) 50%, transparent 70%)',
-                                transform: 'scale(0.8)',
+                        <motion.div
+                            className="relative z-10 w-[78vw] max-w-[410px] h-[400px] lg:h-[520px]"
+                            animate={{ y: [0, -5, 0], rotate: [0, 0.18, 0, -0.18, 0] }}
+                            transition={{
+                                y: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
+                                rotate: { duration: 12.5, repeat: Infinity, ease: 'easeInOut' },
                             }}
-                        />
-                        
-                        {/* Lottie Animation */}
-                        <div className="relative z-10 w-full h-full lottie-hero-container">
-                            <Lottie
-                                animationData={heroAnimation}
-                                loop={true}
-                                autoplay={true}
-                                style={{ width: '100%', height: '100%' }}
-                            />
-                        </div>
+                        >
+                            <div className="absolute inset-[6px] rounded-[1.95rem] overflow-hidden">
+                                <Image
+                                    src="/my_pic.jpeg"
+                                    alt="Portrait of Hari Teja Patnala"
+                                    fill
+                                    priority
+                                    sizes="(min-width: 1024px) 35vw, 82vw"
+                                    className="object-cover object-center scale-[1.05]"
+                                />
+                            </div>
+
+                            <svg
+                                viewBox="0 0 410 520"
+                                preserveAspectRatio="none"
+                                className="absolute inset-0 w-full h-full pointer-events-none"
+                                aria-hidden="true"
+                            >
+                                <defs>
+                                    <linearGradient id={frameGradientId} x1="0" y1="0" x2="410" y2="520" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stopColor="#00F0FF" />
+                                        <stop offset="35%" stopColor="#8B5CF6" />
+                                        <stop offset="70%" stopColor="#FF6B35" />
+                                        <stop offset="100%" stopColor="#4ADE80" />
+                                        <animateTransform
+                                            attributeName="gradientTransform"
+                                            type="rotate"
+                                            from="0 205 260"
+                                            to="360 205 260"
+                                            dur="7s"
+                                            repeatCount="indefinite"
+                                        />
+                                    </linearGradient>
+                                </defs>
+
+                                <rect
+                                    x="4"
+                                    y="4"
+                                    width="402"
+                                    height="512"
+                                    rx="38"
+                                    ry="38"
+                                    className="hero-frame-track"
+                                />
+                                <rect
+                                    x="4"
+                                    y="4"
+                                    width="402"
+                                    height="512"
+                                    rx="38"
+                                    ry="38"
+                                    className="hero-frame-flow"
+                                    stroke={`url(#${frameGradientId})`}
+                                />
+                            </svg>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
@@ -387,6 +426,42 @@ export default function HeroSection() {
                     Scroll to explore
                 </span>
             </motion.div>
+
+            <style jsx>{`
+                .hero-frame-track {
+                    fill: none;
+                    stroke: rgba(148, 163, 184, 0.32);
+                    stroke-width: 2.2;
+                }
+
+                .hero-frame-flow {
+                    fill: none;
+                    stroke-width: 4;
+                    stroke-linecap: round;
+                    stroke-dasharray: 220 1240;
+                    stroke-dashoffset: 0;
+                    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.7)) drop-shadow(0 0 16px rgba(139, 92, 246, 0.45));
+                    animation: hero-border-loader 4.6s cubic-bezier(0.5, 0.1, 0.5, 1) infinite;
+                }
+
+                :global(.light-mode) .hero-frame-track {
+                    stroke: rgba(15, 23, 42, 0.32);
+                }
+
+                :global(.light-mode) .hero-frame-flow {
+                    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.55)) drop-shadow(0 0 12px rgba(139, 92, 246, 0.38));
+                }
+
+                @keyframes hero-border-loader {
+                    0% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    100% {
+                        stroke-dashoffset: -1460;
+                    }
+                }
+            `}</style>
         </section>
     );
 }

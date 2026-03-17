@@ -1,64 +1,58 @@
 # Portfolio Presentation Script (2 to 2.5 Minutes)
 
-This is a natural, first-person speaking script designed for live delivery in class.
-Use it as-is for tomorrow.
+This version is aligned with your current live portfolio flow and section order.
 
 ## 1) Before Opening Laptop (20 to 30 seconds)
 
 Good afternoon, ma'am. Good afternoon, everyone.
 
-My name is Hari Teja Patnala, and I am currently pursuing my third year B.Tech in Computer Science and Engineering at Lovely Professional University.
+My name is Hari Teja Patnala, and I am a pre-final year B.Tech Computer Science and Engineering student at Lovely Professional University.
 
-I chose computer science because I have always been curious about how systems like Google actually work behind the screen. I wanted to understand why algorithms are designed in a certain way, how code scales, and how good engineering decisions create real impact.
+I chose computer science because I wanted to understand how high-scale systems are actually engineered, from algorithms to product performance.
 
-Along with my major, I also chose a minor in Data Science and an open minor in Financial Markets, because I wanted both technical depth and practical decision-making skills.
+Along with my major, I pursued a minor in Data Science and an open minor in Financial Markets to build both technical depth and decision-making ability.
 
-Today, I will quickly present my portfolio and the work I have built around this journey.
+Today, I will present my portfolio, which is designed to show measurable engineering outcomes.
 
-## 2) Start Portfolio and Introduce Home Section (15 to 20 seconds)
+## 2) Home Section (15 to 20 seconds)
 
-As you can see on the home screen, this portfolio represents my identity as an SDE, ML Engineer, and AI Architect.
+On the home screen, I present myself as an SDE, ML Engineer, and AI Architect.
 
-The goal of this design is to communicate both clarity and technical depth, not just visuals.
+The landing section is intentionally clean and dynamic, with role-based transitions and a focused visual identity, so the viewer immediately understands both my technical direction and professional profile.
 
-I have kept the portfolio structured, measurable, and easy to navigate for recruiters and faculty.
+## 3) About + Skills + Impact + Engineering Philosophy (40 to 50 seconds)
 
-## 3) About Me + Skills + Certifications (30 to 35 seconds)
+In the About section, I have highlighted my current academic and problem-solving profile: 9.18 CGPA and 900 plus LeetCode problems solved.
 
-In my About section, I have highlighted my academic profile and progress.
+The Skills section groups my stack across frontend engineering, AI and ML, and systems-oriented development, including React, TypeScript, Next.js, Python, cloud, and DSA.
 
-I currently have a 9.18 CGPA, and I have solved 900 plus problems on LeetCode, which helped me build strong algorithmic thinking and consistency.
+Then, in Impact Metrics, I show project-level outcomes rather than generic claims.
 
-I have also completed certifications including Oracle OCI Data Science Professional, Oracle OCI Developer Professional, IBM Python for Data Science and AI, and Microsoft Generative AI Essentials.
+In Engineering Philosophy, I present the principles I follow while building systems: systems thinking, algorithm optimization, production discipline, AI integration, and performance-first architecture.
 
-My core technical stack includes React, TypeScript, Next.js, Python, machine learning, and cloud-oriented development.
+## 4) Projects and Deep-Dive Flow (50 to 60 seconds)
 
-## 4) Projects Section (50 to 60 seconds)
+My portfolio has three core projects with measurable impact.
 
-Now coming to my projects, I focused on projects with measurable outcomes.
+First is AlgoQuest, an algorithm visualizer built with React and TypeScript. It delivers a 40 percent learning efficiency boost, supports 15 plus algorithms, and provides multi-language code support.
 
-My first project is AlgoQuest, an algorithm visualizer built with React and TypeScript.
-The core impact is a 40 percent learning boost, with 15 plus algorithms and multi-language code support.
-This project came from my own experience after solving 900 plus coding problems.
+Second is AI Game Tester, built using Python, Streamlit, Gemini API, and Plotly. It analyzes 700 plus game cases with under 2-second AI response.
 
-My second project is AI Game Tester, built using Python, Streamlit, Gemini API, and Plotly.
-It analyzes 700 plus game cases with under two seconds response time.
-The idea was to combine AI with practical QA workflows.
+Third is Real Estate House Price Predictor, built using XGBoost, Scikit-learn, SHAP, and geospatial tooling. It is trained on 80K plus records across 20 years and reaches 92 percent prediction accuracy with explainable outputs.
 
-My third project is a Real Estate House Price Predictor using XGBoost, Scikit-learn, SHAP, and geospatial analytics.
-It is trained on 80K plus records across 20 years and achieves 92 percent accuracy with explainable outputs.
+From the landing page, each project opens into a dedicated deep-dive mode where I showcase architecture, story, and implementation details.
 
-## 5) Competitive Track + Resume + Contact (20 to 25 seconds)
+## 5) Certifications + Achievements + Contact (20 to 25 seconds)
 
-I have also highlighted my competitive and achievement profile, including IMO State Rank 1 and MumbaiHacks 2025 Finalist.
+I have also included a certifications timeline with verification links for Oracle OCI Data Science Professional, Oracle OCI Developer Professional, IBM Python for Data Science and AI, and Microsoft and LinkedIn Generative AI Essentials.
 
-My downloadable resume is available directly in the portfolio, and all contact links including LinkedIn, GitHub, email, and LeetCode are provided in the contact section for easy verification.
+My achievement highlights include IMO State Rank 1 and MumbaiHacks 2025 Finalist.
+
+My resume is available for direct download, and all professional links such as LinkedIn, GitHub, email, and LeetCode are provided in the contact section.
 
 ## 6) Professional Closing (10 to 15 seconds)
 
-To conclude, this portfolio reflects who I am as a learner, builder, and future engineer.
-
-I am continuously improving it with more industry exposure, open-source contributions, and research-oriented work.
+To conclude, this portfolio reflects my approach as a learner, builder, and future engineer, focused on clarity, performance, and measurable impact.
 
 Thank you, ma'am. Thank you, everyone.
 
@@ -66,17 +60,15 @@ Thank you, ma'am. Thank you, everyone.
 
 # Ultra-Short Backup Version (About 1 minute 40 seconds)
 
-Good afternoon, ma'am and everyone. I am Hari Teja Patnala, a third-year B.Tech CSE student at Lovely Professional University.
+Good afternoon, ma'am and everyone. I am Hari Teja Patnala, a pre-final year B.Tech CSE student at Lovely Professional University.
 
-I chose computer science to deeply understand how systems like Google work, how algorithms are designed, and how software creates impact. I also pursued a Data Science minor and an open minor in Financial Markets.
+My portfolio is structured in a recruiter-friendly flow: home identity, about and skills, impact metrics, engineering philosophy, project deep dives, certifications, and contact.
 
-In my portfolio, I have clearly presented my profile, skills, projects, certifications, resume, and contact details.
+I currently hold a 9.18 CGPA, solved 900 plus LeetCode problems, and completed certifications from Oracle, IBM, and Microsoft and LinkedIn.
 
-I currently hold a 9.18 CGPA, solved 900 plus LeetCode problems, and completed Oracle, IBM, and Microsoft certifications.
+My projects are outcomes-driven: AlgoQuest shows 40 percent learning efficiency boost, AI Game Tester analyzes 700 plus game cases with sub-2-second response, and my Real Estate ML system achieves 92 percent accuracy on 80K plus records across 20 years.
 
-My projects are outcome-focused: AlgoQuest improved algorithm learning by 40 percent, AI Game Tester analyzes 700 plus game cases in under two seconds, and my Real Estate ML system gives 92 percent accurate predictions on 80K plus records.
-
-This portfolio represents my engineering mindset: clarity, performance, and measurable results.
+This portfolio represents my engineering mindset: solve real problems, measure results, and communicate clearly.
 
 Thank you.
 
@@ -96,13 +88,13 @@ Thank you.
 
 - Start by looking at ma'am for first sentence.
 - Then scan left center right every 4 to 5 seconds.
-- On key achievements, look at ma'am while speaking the metric.
+- On key metrics, look at ma'am while speaking the number.
 - During project explanation, glance at screen briefly, then return to audience.
 
 ## C) Voice and Pace
 
 - First line slow and clear.
-- Use a small pause after each metric (for example, "9.18 CGPA" pause, "900 plus LeetCode" pause).
+- Use a small pause after each metric (for example, "9.18 CGPA" pause, "900 plus LeetCode" pause, "92 percent accuracy" pause).
 - Keep speed moderate, not fast.
 - End each section with a lower, confident tone.
 

@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -63,7 +64,7 @@ export function ImageCarouselHero({
     // Initialize rotating cards
     useEffect(() => {
         setRotatingCards(images.map((_, i) => i * (360 / images.length)))
-    }, [images.length])
+    }, [images])
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
@@ -125,9 +126,11 @@ export function ImageCarouselHero({
                                         )}
                                         style={{ transformStyle: "preserve-3d" }}
                                     >
-                                        <img
+                                        <Image
                                             src={image.src || "/placeholder.svg"}
                                             alt={image.alt}
+                                            fill
+                                            sizes="(min-width: 640px) 160px, 128px"
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                             draggable={false}
                                         />

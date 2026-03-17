@@ -6,6 +6,7 @@ import {
     useState,
     ReactNode,
 } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 interface ScrollExpandMediaProps {
@@ -302,9 +303,11 @@ const ScrollExpandMedia = ({
                                     )
                                 ) : (
                                     <div className='relative w-full h-full'>
-                                        <img
+                                        <Image
                                             src={mediaSrc}
                                             alt={title || 'Media content'}
+                                            fill
+                                            sizes='(min-width: 1024px) 92vw, 98vw'
                                             className='w-full h-full object-cover rounded-xl'
                                         />
                                     </div>

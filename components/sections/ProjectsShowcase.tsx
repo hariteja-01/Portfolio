@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { portfolioModes } from '@/data/portfolio';
 
@@ -85,9 +86,11 @@ export default function ProjectsShowcase({
                         >
                             {/* Card Top: First frame */}
                             <div className="relative h-56 overflow-hidden rounded-t-2xl">
-                                <img
+                                <Image
                                     src={`${mode.folderPath}/1.jpg`}
                                     alt={mode.name}
+                                    fill
+                                    sizes="(min-width: 768px) 33vw, 100vw"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                                 {/* Gradient overlay */}

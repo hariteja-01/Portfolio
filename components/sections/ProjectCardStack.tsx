@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { portfolioModes } from '@/data/portfolio';
 import { CardStack, CardStackItem } from '@/components/ui/card-stack';
@@ -67,12 +68,14 @@ function VideoCard({
             data-cursor="project"
         >
             {/* Poster image (always visible as base) */}
-            <img
+            <Image
                 src={item.posterSrc}
                 alt={item.title}
+                fill
+                priority
+                sizes="(min-width: 1024px) 30vw, 100vw"
                 className="absolute inset-0 h-full w-full object-cover"
                 draggable={false}
-                loading="eager"
             />
 
             {/* Video overlay (plays on hover) */}
