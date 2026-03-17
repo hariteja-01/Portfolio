@@ -20,33 +20,64 @@ export default function ContactSection() {
         message: '',
     });
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+    const [errorText, setErrorText] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const emailJsServiceId =
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_irddtaj';
+    const emailJsTemplateId =
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_qlcfc08';
+    const emailJsPublicKey =
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'ofRC8JbWo4PRvixus';
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        setStatus('sending');
+        if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+            setErrorText('Please fill in all fields before sending.');
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 4000);
+            return;
+        }
 
-        emailjs
-            .send(
-                'service_irddtaj',
-                'template_qlcfc08',
+        if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
+            setErrorText('Email service is not configured. Please check EmailJS credentials.');
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 4500);
+            return;
+        }
+
+        setStatus('sending');
+        setErrorText('');
+
+        try {
+            await emailjs.send(
+                emailJsServiceId,
+                emailJsTemplateId,
                 {
                     from_name: formData.name,
                     from_email: formData.email,
                     subject: formData.subject,
                     message: formData.message,
                 },
-                'ofRC8JbWo4PRvixus'
-            )
-            .then(() => {
-                setStatus('success');
-                setFormData({ name: '', email: '', subject: '', message: '' });
-                setTimeout(() => setStatus('idle'), 4000);
-            })
-            .catch(() => {
-                setStatus('error');
-                setTimeout(() => setStatus('idle'), 4000);
-            });
+                emailJsPublicKey
+            );
+
+            setStatus('success');
+            setFormData({ name: '', email: '', subject: '', message: '' });
+            setTimeout(() => setStatus('idle'), 4000);
+        } catch (error: unknown) {
+            const message =
+                typeof error === 'object' &&
+                error !== null &&
+                'text' in error &&
+                typeof (error as { text: unknown }).text === 'string'
+                    ? (error as { text: string }).text
+                    : 'Failed to send. Please verify EmailJS service/template/public key setup.';
+
+            setErrorText(message);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
     };
 
     return (
@@ -122,6 +153,7 @@ export default function ContactSection() {
                                 <input
                                     type="text"
                                     placeholder="Your name"
+                                    required
                                     value={formData.name}
                                     onChange={(e) =>
                                         setFormData((f) => ({ ...f, name: e.target.value }))
@@ -141,6 +173,7 @@ export default function ContactSection() {
                                 <input
                                     type="email"
                                     placeholder="your@email.com"
+                                    required
                                     value={formData.email}
                                     onChange={(e) =>
                                         setFormData((f) => ({ ...f, email: e.target.value }))
@@ -160,6 +193,7 @@ export default function ContactSection() {
                                 <input
                                     type="text"
                                     placeholder="Subject"
+                                    required
                                     value={formData.subject}
                                     onChange={(e) =>
                                         setFormData((f) => ({ ...f, subject: e.target.value }))
@@ -179,6 +213,7 @@ export default function ContactSection() {
                                 <textarea
                                     placeholder="Tell me about your project..."
                                     rows={4}
+                                    required
                                     value={formData.message}
                                     onChange={(e) =>
                                         setFormData((f) => ({ ...f, message: e.target.value }))
@@ -224,6 +259,12 @@ export default function ContactSection() {
                                         ? 'Failed — Try Again'
                                         : 'Send Message →'}
                                 </button>
+
+                                {status === 'error' && errorText && (
+                                    <p className="text-sm" style={{ color: '#EF4444' }}>
+                                        {errorText}
+                                    </p>
+                                )}
                             </form>
                         </GlassmorphicCard>
                     </motion.div>
