@@ -99,70 +99,60 @@ export default function EngineeringPhilosophySection() {
                     </p>
                 </motion.div>
 
-                {/* Cards grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {/* Clean recruiter-first timeline layout */}
+                <div
+                    className="rounded-3xl p-6 md:p-8"
+                    style={{
+                        background: 'var(--glass-bg)',
+                        border: '1px solid var(--glass-border)',
+                        boxShadow: 'var(--glass-shadow)',
+                        backdropFilter: 'blur(20px)',
+                    }}
+                >
                     {philosophyPoints.map((point, i) => (
                         <motion.div
                             key={point.title}
-                            initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.45, delay: i * 0.08 }}
                             viewport={{ once: true }}
-                            whileHover={{
-                                y: -4,
-                                transition: { duration: 0.2 },
-                            }}
-                            className="rounded-2xl p-6 flex flex-col gap-4 group"
-                            style={{
-                                background: 'var(--glass-bg)',
-                                border: '1px solid var(--glass-border)',
-                                backdropFilter: 'blur(20px)',
-                                boxShadow: 'var(--glass-shadow)',
-                                transformStyle: 'preserve-3d',
-                                perspective: '800px',
-                            }}
-                            onMouseEnter={(e) => {
-                                (e.currentTarget as HTMLElement).style.borderColor = `${point.color}40`;
-                                (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px ${point.color}20`;
-                            }}
-                            onMouseLeave={(e) => {
-                                (e.currentTarget as HTMLElement).style.borderColor = 'var(--glass-border)';
-                                (e.currentTarget as HTMLElement).style.boxShadow = 'var(--glass-shadow)';
-                            }}
+                            className="grid grid-cols-[auto_1fr] gap-4 md:gap-6 py-5 md:py-6"
                         >
-                            {/* Icon */}
-                            <div
-                                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
-                                style={{
-                                    background: `${point.color}15`,
-                                    color: point.color,
-                                    border: `1px solid ${point.color}25`,
-                                }}
-                            >
-                                {point.icon}
+                            <div className="flex flex-col items-center pt-0.5">
+                                <div
+                                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                                    style={{
+                                        background: `${point.color}16`,
+                                        color: point.color,
+                                        border: `1px solid ${point.color}40`,
+                                    }}
+                                >
+                                    {point.icon}
+                                </div>
+                                {i !== philosophyPoints.length - 1 && (
+                                    <div
+                                        className="mt-3 w-px flex-1 min-h-10"
+                                        style={{
+                                            background: `linear-gradient(180deg, ${point.color}66, transparent)`,
+                                        }}
+                                    />
+                                )}
                             </div>
 
-                            {/* Content */}
                             <div>
                                 <h3
-                                    className="font-bold text-base mb-2"
+                                    className="font-bold text-base md:text-lg mb-1.5"
                                     style={{ color: 'var(--text-primary)' }}
                                 >
                                     {point.title}
                                 </h3>
                                 <p
-                                    className="text-sm leading-relaxed"
+                                    className="text-sm md:text-[15px] leading-relaxed"
                                     style={{ color: 'var(--text-secondary)' }}
                                 >
                                     {point.description}
                                 </p>
                             </div>
-
-                            {/* Bottom accent line */}
-                            <div
-                                className="h-0.5 rounded-full mt-auto w-0 group-hover:w-full transition-all duration-500"
-                                style={{ background: point.color }}
-                            />
                         </motion.div>
                     ))}
                 </div>

@@ -138,17 +138,17 @@ export default function Home() {
                         <AnimatedSectionDivider color="#FF6B35" />
                         <SkillsSection />
 
-                        <AnimatedSectionDivider color="#8B5CF6" />
-                        <ImpactMetricsSection />
-
-                        <AnimatedSectionDivider color="#FF6B35" />
-                        <EngineeringPhilosophySection />
-
                         <AnimatedSectionDivider color="#00F0FF" />
                         <ProjectCardStack onProjectSelect={handleProjectSelect} />
 
                         <AnimatedSectionDivider color="#8B5CF6" />
+                        <ImpactMetricsSection />
+
+                        <AnimatedSectionDivider color="#8B5CF6" />
                         <CertificationSection />
+
+                        <AnimatedSectionDivider color="#FF6B35" />
+                        <EngineeringPhilosophySection />
 
                         <AnimatedSectionDivider color="#8B5CF6" />
                         <ContactSection />
