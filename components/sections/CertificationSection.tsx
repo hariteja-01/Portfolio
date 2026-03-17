@@ -98,7 +98,7 @@ export default function CertificationSection() {
                         Certifications
                     </h2>
                     <p className="mt-3 max-w-2xl text-base" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
-                        Chronological certifications timeline with official links for each credential.
+                        Verified industry credentials with direct access to each official certificate.
                     </p>
                 </motion.div>
 

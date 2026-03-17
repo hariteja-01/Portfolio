@@ -58,7 +58,7 @@ export default function AchievementsSection() {
                         Achievements
                     </h2>
                     <p className="mt-3 max-w-3xl text-base" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
-                        Chronologically arranged in decreasing order, focused on university and professional milestones.
+                        Key academic and professional milestones presented with clear impact and progression.
                     </p>
                 </motion.div>
 
