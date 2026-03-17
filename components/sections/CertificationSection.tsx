@@ -2,7 +2,7 @@
 
 import type { ComponentType, CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { BookOpen, CheckCircle2, ShieldCheck } from "lucide-react";
 import { FaMicrosoft } from "react-icons/fa";
 import { SiCoursera, SiLinkedin, SiOracle, SiPython } from "react-icons/si";
 import { profile } from "@/data/portfolio";
@@ -20,12 +20,14 @@ const issuerIconMap: Record<string, ComponentType<{ className?: string; style?: 
     Oracle: SiOracle,
     "IBM Coursera": SiCoursera,
     "Microsoft & LinkedIn": SiLinkedin,
+    NPTEL: BookOpen,
 };
 
 const issuerAccentMap: Record<string, string> = {
     Oracle: "#F80000",
     "IBM Coursera": "#0056D2",
     "Microsoft & LinkedIn": "#0A66C2",
+    NPTEL: "#0E9F6E",
 };
 
 function toSortableValue(issuedAt?: string) {
@@ -58,6 +60,15 @@ function getCornerGraphic(cert: CertificationsItem): ReactNode {
             <div className="flex items-end gap-2" aria-hidden="true">
                 <FaMicrosoft className="w-8 h-8 md:w-10 md:h-10" style={{ color: "#F25022" }} />
                 <SiLinkedin className="w-10 h-10 md:w-12 md:h-12" style={{ color: "#0A66C2" }} />
+            </div>
+        );
+    }
+
+    if (cert.issuer === "NPTEL") {
+        return (
+            <div className="flex flex-col items-end gap-1" aria-hidden="true">
+                <BookOpen className="w-14 h-14 md:w-18 md:h-18" style={{ color: "#0E9F6E" }} />
+                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#0E9F6E" }}>IIT Madras</span>
             </div>
         );
     }
@@ -140,7 +151,7 @@ export default function CertificationSection() {
                                         href={cert.certificationsUrl || "#"}
                                         variant={variant}
                                         className="min-h-[220px]"
-                                        ctaLabel="View Certifications"
+                                        ctaLabel="View Certificate"
                                         cornerGraphic={getCornerGraphic(cert)}
                                     >
                                         <div className="relative z-10 mt-4 flex flex-wrap gap-2 items-center">

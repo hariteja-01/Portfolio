@@ -24,6 +24,34 @@ export interface PortfolioMode {
     };
 }
 
+export interface EducationItem {
+    institution: string;
+    location: string;
+    qualification: string;
+    score: string;
+    period: string;
+    sortValue: number;
+}
+
+export interface TrainingItem {
+    title: string;
+    organization: string;
+    credential: string;
+    period: string;
+    sortValue: number;
+    highlights: string[];
+    tech: string[];
+    certificateUrl?: string;
+}
+
+export interface AchievementItem {
+    title: string;
+    date: string;
+    sortValue: number;
+    description: string;
+    issuer?: string;
+}
+
 export const profile = {
     name: "Hari Teja Patnala",
     tagline: "SDE | ML Engineer | AI Architect",
@@ -89,6 +117,13 @@ export const profile = {
             certificationsUrl: "https://www.coursera.org/account/accomplishments/verify/SF891HUZCUPO",
         },
         {
+            title: "Social Networks",
+            issuer: "NPTEL",
+            date: "May 2025",
+            issuedAt: "2025-05",
+            certificationsUrl: "https://drive.google.com/file/d/1_yGVcXbJ3xXDmHjiV2KOnBVYuOXHxVw9/view?usp=sharing",
+        },
+        {
             title: "Generative AI Essentials",
             issuer: "Microsoft & LinkedIn",
             date: "Jul 2024",
@@ -96,6 +131,80 @@ export const profile = {
             certificationsUrl: "https://www.linkedin.com/learning/certificates/88a0488c7323d1f8c05da9b8501076b549e8b9c573592a7023fb007948e60f8c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPV%2FFjUW0S1SH%2FKNxFUstUw%3D%3D",
         },
     ],
+    education: [
+        {
+            institution: "Lovely Professional University",
+            location: "Phagwara, Punjab",
+            qualification: "Bachelor of Technology - Computer Science and Engineering",
+            score: "CGPA: 9.18",
+            period: "Aug 2023 - Present",
+            sortValue: 202308,
+        },
+        {
+            institution: "A.P Model School & Junior College",
+            location: "Srikakulam, Andhra Pradesh",
+            qualification: "Intermediate",
+            score: "Percentage: 96.2",
+            period: "Jun 2021 - May 2023",
+            sortValue: 202106,
+        },
+        {
+            institution: "A.P Model School & Junior College",
+            location: "Srikakulam, Andhra Pradesh",
+            qualification: "Matriculation",
+            score: "Percentage: 97.5",
+            period: "Jun 2020 - Apr 2021",
+            sortValue: 202006,
+        },
+    ] as EducationItem[],
+    training: [
+        {
+            title: "AlgoTutor",
+            organization: "EdTech Company",
+            credential: "Certificate",
+            period: "Jun 2025 - Jul 2025",
+            sortValue: 202507,
+            highlights: [
+                "Gained strong proficiency in core DSA concepts through a 28-day intensive competitive programming training, consistently applying concepts in daily problem-solving.",
+                "Demonstrated the ability to analyze, optimize, and refactor multiple solution approaches, consistently improving algorithmic time and space complexity across problems.",
+                "Built AlgoQuest, a structured competitive-programming practice project, completing algorithmic problems with measurable efficiency improvements.",
+            ],
+            tech: ["C++", "Python"],
+            certificateUrl: "https://drive.google.com/file/d/1LwJUjKVzSXwMGsr3idiMoE52QkBwhH0z/view?usp=sharing",
+        },
+    ] as TrainingItem[],
+    achievementsDetailed: [
+        {
+            title: '"HI FLYERS" Achievers Award',
+            date: "Dec 2025",
+            sortValue: 202512,
+            issuer: "Lovely Professional University",
+            description:
+                "Honored for outstanding academic performance and top-tier standing in core computer science coursework.",
+        },
+        {
+            title: "MumbaiHacks 2025 Finalist",
+            date: "Nov 2025",
+            sortValue: 202511,
+            description:
+                "Secured a finalist position at MumbaiHacks 2025 by developing and presenting a functional prototype under time-bound hackathon conditions.",
+        },
+        {
+            title: "LeetCode Algorithmic Excellence",
+            date: "Oct 2025",
+            sortValue: 202510,
+            description:
+                "Ranked in the Top 35.28% globally with 900+ problems solved across C++, Java, and C. Earned 17 achievement badges and sustained a 390-day problem-solving streak.",
+        },
+        {
+            title: "University Academic Excellence Award",
+            date: "May 2024",
+            sortValue: 202405,
+            issuer: "Lovely Professional University",
+            description:
+                "Awarded for outstanding academic performance (TGPA: 9.50) and top-tier standing in core computer science coursework.",
+        },
+    ] as AchievementItem[],
 };
 
 export const portfolioModes: PortfolioMode[] = [

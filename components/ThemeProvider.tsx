@@ -35,16 +35,17 @@ const darkVars: Record<string, string> = {
 };
 
 const lightVars: Record<string, string> = {
-    '--bg-primary': '#F5F5F7',
+    '--bg-primary': '#F6F7FB',
     '--bg-secondary': '#FFFFFF',
-    '--bg-card': 'rgba(0,0,0,0.03)',
-    '--text-primary': '#1D1D1F',
-    '--text-secondary': '#86868B',
-    '--border-color': 'rgba(0,0,0,0.1)',
-    '--glass-bg': 'rgba(255,255,255,0.7)',
-    '--glass-border': 'rgba(0,0,0,0.08)',
-    '--glass-shadow': '0 8px 32px rgba(0,0,0,0.08)',
-    '--cursor-glow': 'rgba(0,240,255,0.08)',
+    '--bg-card': 'rgba(255,255,255,0.82)',
+    '--text-primary': '#111827',
+    '--text-secondary': '#4B5563',
+    '--border-color': 'rgba(15,23,42,0.12)',
+    '--glass-bg': 'rgba(255,255,255,0.84)',
+    '--glass-border': 'rgba(15,23,42,0.1)',
+    '--glass-shadow': '0 14px 40px rgba(15,23,42,0.09)',
+    '--cursor-glow': 'rgba(0,240,255,0.12)',
+    '--text-tertiary': 'rgba(17,24,39,0.52)',
 };
 
 function updateFavicon(theme: Theme) {

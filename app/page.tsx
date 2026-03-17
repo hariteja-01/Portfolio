@@ -17,9 +17,11 @@ import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import ProjectCardStack from '@/components/sections/ProjectCardStack';
+import TrainingSection from '@/components/sections/TrainingSection';
 import ImpactMetricsSection from '@/components/sections/ImpactMetricsSection';
 import EngineeringPhilosophySection from '@/components/sections/EngineeringPhilosophySection';
 import CertificationSection from '@/components/sections/CertificationSection';
+import AchievementsSection from '@/components/sections/AchievementsSection';
 import CustomCursor from '@/components/CustomCursor';
 import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -144,8 +146,14 @@ export default function Home() {
                         <AnimatedSectionDivider color="#8B5CF6" />
                         <ImpactMetricsSection />
 
+                        <AnimatedSectionDivider color="#FF6B35" />
+                        <TrainingSection />
+
                         <AnimatedSectionDivider color="#8B5CF6" />
                         <CertificationSection />
+
+                        <AnimatedSectionDivider color="#00F0FF" />
+                        <AchievementsSection />
 
                         <AnimatedSectionDivider color="#FF6B35" />
                         <EngineeringPhilosophySection />

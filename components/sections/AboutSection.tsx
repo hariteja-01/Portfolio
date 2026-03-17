@@ -3,62 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import GlassmorphicCard from '@/components/GlassmorphicCard';
-
-function AnimatedCounter({
-    target,
-    duration = 1.5,
-    prefix = '',
-    suffix = '',
-    decimals = 0,
-}: {
-    target: number;
-    duration?: number;
-    prefix?: string;
-    suffix?: string;
-    decimals?: number;
-}) {
-    const [count, setCount] = useState(0);
-    const [started, setStarted] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !started) {
-                    setStarted(true);
-                }
-            },
-            { threshold: 0.3 }
-        );
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, [started]);
-
-    useEffect(() => {
-        if (!started) return;
-        const steps = 60;
-        const increment = target / steps;
-        let current = 0;
-        const interval = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                setCount(target);
-                clearInterval(interval);
-            } else {
-                setCount(current);
-            }
-        }, (duration * 1000) / steps);
-        return () => clearInterval(interval);
-    }, [started, target, duration]);
-
-    return (
-        <div ref={ref}>
-            {prefix}
-            {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
-            {suffix}
-        </div>
-    );
-}
+import { GraduationCap, School, MapPin, CalendarRange } from 'lucide-react';
+import { profile, type EducationItem } from '@/data/portfolio';
 
 export default function AboutSection() {
     const [typedText, setTypedText] = useState('');
@@ -76,7 +22,7 @@ I'm a pre-final year CSE undergrad at Lovely Professional University with a 9.18
 
 > certifications --list
 
-Dual Oracle Cloud certified (Data Science + Developer Professional). IBM & Microsoft certified in AI & GenAI.
+Dual Oracle Cloud certified (Data Science + Developer Professional). IBM & Microsoft certified in AI & GenAI. NPTEL certified in Social Networks (IIT Madras).
 
 > interests
 
@@ -114,49 +60,9 @@ Building the future, one commit at a time.`;
         return () => clearInterval(interval);
     }, [isTyping, terminalContent]);
 
-    const statCards = [
-        {
-            value: 9.18,
-            decimals: 2,
-            suffix: '',
-            prefix: '',
-            label: 'CGPA',
-            sub: 'Top tier among 2000+ CSE students',
-            gradient: true,
-            color: '',
-        },
-        {
-            value: 900,
-            decimals: 0,
-            suffix: '+',
-            prefix: '',
-            label: 'LEETCODE',
-            sub: 'Top global percentile',
-            gradient: false,
-            color: '#FFB74D',
-        },
-        {
-            value: 4,
-            decimals: 0,
-            suffix: '',
-            prefix: '',
-            label: 'CERTIFICATIONS',
-            sub: 'Oracle, IBM, Microsoft',
-            gradient: false,
-            color: '#8B5CF6',
-        },
-        {
-            value: 0,
-            decimals: 0,
-            suffix: '',
-            prefix: '#',
-            label: 'STATE RANK',
-            sub: 'International Math Olympiad',
-            gradient: false,
-            color: '#FF6B35',
-            isRank: true,
-        },
-    ];
+    const education = [...(profile.education as EducationItem[])].sort(
+        (a, b) => b.sortValue - a.sortValue
+    );
 
     return (
         <section id="about" className="py-24 px-6">
@@ -172,7 +78,7 @@ Building the future, one commit at a time.`;
                     About Me
                 </motion.h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
                     {/* Left: Terminal */}
                     <motion.div
                         ref={typingRef}
@@ -180,7 +86,7 @@ Building the future, one commit at a time.`;
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className="rounded-xl overflow-hidden"
+                        className="rounded-xl overflow-hidden h-full flex flex-col"
                         style={{
                             border: '1px solid var(--border-color)',
                             boxShadow: 'var(--glass-shadow)',
@@ -188,7 +94,7 @@ Building the future, one commit at a time.`;
                     >
                         {/* Terminal header */}
                         <div
-                            className="h-8 flex items-center px-3 gap-2"
+                            className="h-8 flex items-center px-3 gap-2 shrink-0"
                             style={{ background: 'var(--bg-secondary)' }}
                         >
                             <div className="w-3 h-3 rounded-full" style={{ background: '#FF5F56' }} />
@@ -203,85 +109,115 @@ Building the future, one commit at a time.`;
                         </div>
                         {/* Terminal body */}
                         <div
-                            className="p-6 font-mono text-sm leading-relaxed overflow-auto"
+                            className="flex-1 p-4 md:p-5 font-mono text-sm leading-relaxed overflow-auto"
                             style={{
                                 background: 'linear-gradient(180deg, #0B1220 0%, #111827 100%)',
                                 color: '#86EFAC',
-                                maxHeight: 420,
-                                minHeight: 380,
+                                minHeight: 340,
                             }}
                         >
-                            <pre className="whitespace-pre-wrap">{typedText}</pre>
+                            <pre className="m-0 whitespace-pre-wrap break-words">{typedText}</pre>
                             <span className="animate-blink">_</span>
                         </div>
                     </motion.div>
 
-                    {/* Right: Stat Cards */}
-                    <div className="grid grid-cols-2 gap-4 content-start">
-                        {statCards.map((card, i) => (
-                            <motion.div
-                                key={card.label}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.4, delay: i * 0.1 }}
-                                viewport={{ once: true }}
-                            >
-                                <GlassmorphicCard
-                                    className="p-6"
-                                    hoverColor={card.color || '#00F0FF'}
-                                    hoverGlow
+                    {/* Right: Education timeline */}
+                    <div className="relative">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.55 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            className="mb-4"
+                        >
+                            <p className="text-xs uppercase tracking-[0.25em] mb-2 font-mono" style={{ color: '#8B5CF6' }}>
+                                Education
+                            </p>
+                            <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                                Academic Journey
+                            </h3>
+                        </motion.div>
+
+                        <div className="absolute left-[13px] top-20 bottom-3 w-[2px]" style={{
+                            background: 'linear-gradient(180deg, rgba(0,240,255,0.65), rgba(139,92,246,0.45), rgba(255,107,53,0.4))',
+                        }} />
+
+                        <div className="space-y-4">
+                            {education.map((item, i) => (
+                                <motion.div
+                                    key={`${item.institution}-${item.period}`}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.45, delay: i * 0.1 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    className="relative pl-10"
                                 >
                                     <div
-                                        className="text-4xl font-black"
-                                        style={
-                                            card.gradient
-                                                ? {
-                                                    background:
-                                                        'linear-gradient(135deg, #00F0FF, #8B5CF6)',
-                                                    WebkitBackgroundClip: 'text',
-                                                    WebkitTextFillColor: 'transparent',
-                                                    backgroundClip: 'text',
-                                                }
-                                                : { color: card.color }
-                                        }
+                                        className="absolute left-0 top-6 w-7 h-7 rounded-full flex items-center justify-center"
+                                        style={{
+                                            background: 'var(--bg-secondary)',
+                                            border: '1px solid rgba(0,240,255,0.5)',
+                                            boxShadow: '0 0 16px rgba(0,240,255,0.28)',
+                                        }}
                                     >
-                                        {card.isRank ? (
-                                            <motion.span
-                                                initial={{ scale: 0 }}
-                                                whileInView={{ scale: 1 }}
-                                                transition={{
-                                                    type: 'spring',
-                                                    stiffness: 200,
-                                                    delay: 0.3 + i * 0.1,
-                                                }}
-                                                viewport={{ once: true }}
-                                            >
-                                                #1
-                                            </motion.span>
+                                        {i === 0 ? (
+                                            <GraduationCap className="w-4 h-4" style={{ color: '#00F0FF' }} />
                                         ) : (
-                                            <AnimatedCounter
-                                                target={card.value}
-                                                decimals={card.decimals}
-                                                prefix={card.prefix}
-                                                suffix={card.suffix}
-                                            />
+                                            <School className="w-4 h-4" style={{ color: '#8B5CF6' }} />
                                         )}
                                     </div>
-                                    <div
-                                        className="text-xs uppercase tracking-widest mt-2"
-                                        style={{ color: 'var(--text-secondary)' }}
-                                    >
-                                        {card.label}
-                                    </div>
-                                    <div
-                                        className="text-xs mt-1"
-                                        style={{ color: 'var(--text-secondary)' }}
-                                    >
-                                        {card.sub}
-                                    </div>
-                                </GlassmorphicCard>
-                            </motion.div>
-                        ))}
+
+                                    <GlassmorphicCard className="p-5" hoverColor="#00F0FF" hoverGlow>
+                                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                                            <div>
+                                                <h4 className="text-base md:text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+                                                    {item.institution}
+                                                </h4>
+                                                <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+                                                    {item.qualification}
+                                                </p>
+                                            </div>
+                                            <span
+                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold h-fit"
+                                                style={{
+                                                    background: 'rgba(0,240,255,0.12)',
+                                                    border: '1px solid rgba(0,240,255,0.35)',
+                                                    color: '#00F0FF',
+                                                }}
+                                            >
+                                                <CalendarRange className="w-3.5 h-3.5" />
+                                                {item.period}
+                                            </span>
+                                        </div>
+
+                                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                                            <span
+                                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs"
+                                                style={{
+                                                    background: 'rgba(139,92,246,0.16)',
+                                                    border: '1px solid rgba(139,92,246,0.35)',
+                                                    color: 'var(--text-primary)',
+                                                }}
+                                            >
+                                                <MapPin className="w-3.5 h-3.5" style={{ color: '#8B5CF6' }} />
+                                                {item.location}
+                                            </span>
+
+                                            <span
+                                                className="px-2.5 py-1 rounded-full text-xs"
+                                                style={{
+                                                    background: 'rgba(255,107,53,0.15)',
+                                                    border: '1px solid rgba(255,107,53,0.35)',
+                                                    color: 'var(--text-primary)',
+                                                }}
+                                            >
+                                                {item.score}
+                                            </span>
+                                        </div>
+                                    </GlassmorphicCard>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 

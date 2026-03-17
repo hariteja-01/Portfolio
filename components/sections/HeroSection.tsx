@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { profile } from '@/data/portfolio';
 import SparkleBackground from '@/components/SparkleBackground';
+import { useTheme } from '@/components/ThemeProvider';
 
 // ─── Animated Role Rotator (typewriter + gradient) ──────────────────
 function RoleRotator({ roles }: { roles: string[] }) {
@@ -73,6 +74,8 @@ export default function HeroSection() {
     const { scrollY } = useScroll();
     const scrollIndicatorOpacity = useTransform(scrollY, [0, 100], [1, 0]);
     const frameGradientId = useId().replace(/:/g, '');
+    const { theme } = useTheme();
+    const isLightMode = theme === 'light';
 
     const firstLine = 'Hari Teja';
     const secondLine = 'Patnala';
@@ -95,7 +98,7 @@ export default function HeroSection() {
                         width: 600,
                         height: 600,
                         background: 'radial-gradient(circle, #00F0FF 0%, transparent 70%)',
-                        opacity: 0.15,
+                        opacity: isLightMode ? 0.2 : 0.15,
                         top: '5%',
                         left: '15%',
                     }}
@@ -106,7 +109,7 @@ export default function HeroSection() {
                         width: 500,
                         height: 500,
                         background: 'radial-gradient(circle, #8B5CF6 0%, transparent 70%)',
-                        opacity: 0.1,
+                        opacity: isLightMode ? 0.15 : 0.1,
                         top: '45%',
                         right: '5%',
                     }}
@@ -117,7 +120,7 @@ export default function HeroSection() {
                         width: 450,
                         height: 450,
                         background: 'radial-gradient(circle, #FF6B35 0%, transparent 70%)',
-                        opacity: 0.08,
+                        opacity: isLightMode ? 0.12 : 0.08,
                         bottom: '5%',
                         left: '45%',
                     }}
@@ -128,7 +131,7 @@ export default function HeroSection() {
                         width: 300,
                         height: 300,
                         background: 'radial-gradient(circle, #4ADE80 0%, transparent 70%)',
-                        opacity: 0.06,
+                        opacity: isLightMode ? 0.1 : 0.06,
                         top: '30%',
                         left: '60%',
                         animation: 'hero-orb-4 28s ease-in-out infinite',
@@ -141,7 +144,7 @@ export default function HeroSection() {
                         backgroundImage:
                             'radial-gradient(circle, var(--text-secondary) 0.5px, transparent 0.5px)',
                         backgroundSize: '30px 30px',
-                        opacity: 0.03,
+                        opacity: isLightMode ? 0.06 : 0.03,
                     }}
                 />
             </div>
@@ -277,7 +280,8 @@ export default function HeroSection() {
                             </a>
                             <a
                                 href="/resume.pdf"
-                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center font-medium px-8 py-4 rounded-full transition-all duration-300"
                                 style={{
                                     color: 'var(--text-primary)',
@@ -292,7 +296,7 @@ export default function HeroSection() {
                                     e.currentTarget.style.background = 'transparent';
                                 }}
                             >
-                                Download CV
+                                View CV
                             </a>
                         </motion.div>
 
