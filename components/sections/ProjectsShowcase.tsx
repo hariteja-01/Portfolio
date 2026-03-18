@@ -113,6 +113,12 @@ export default function ProjectsShowcase({
                                 <p className="text-sm mt-1" style={{ color: mode.themeColor }}>
                                     {mode.subName}
                                 </p>
+                                <p
+                                    className="text-xs mt-1.5 font-medium"
+                                    style={{ color: 'var(--text-secondary)' }}
+                                >
+                                    {mode.period}
+                                </p>
                                 <div
                                     className="h-px w-full my-3"
                                     style={{ background: 'var(--border-color)' }}

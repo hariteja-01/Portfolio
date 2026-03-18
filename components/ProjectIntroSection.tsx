@@ -86,6 +86,16 @@ export default function ProjectIntroSection({ mode }: ProjectIntroSectionProps) 
                 {mode.subName}
             </motion.p>
 
+            <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.62, ease: 'easeOut' }}
+                className="mt-3 text-sm md:text-base font-medium"
+                style={{ color: mode.themeColor }}
+            >
+                {mode.period}
+            </motion.p>
+
             {/* Tech stack pills */}
             <motion.div
                 initial={{ opacity: 0, y: 14 }}

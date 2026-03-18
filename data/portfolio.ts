@@ -1,6 +1,7 @@
 export interface PortfolioMode {
     id: string;
     name: string;
+    period: string;
     subName: string;
     role: string;
     folderPath: string;
@@ -85,7 +86,7 @@ export const profile = {
     leetcode: "https://leetcode.com/u/hariteja01",
     university: "Lovely Professional University",
     degree: "B.Tech CSE | CGPA: 9.18/10",
-    graduation: "Expected Jul 2027",
+    graduation: "Expected Jul '27",
     achievements: [
         "900+ LeetCode Problems",
         "IMO State Rank 1",
@@ -98,35 +99,35 @@ export const profile = {
         {
             title: "OCI Data Science Professional",
             issuer: "Oracle",
-            date: "Nov 2025",
+            date: "Nov '25",
             issuedAt: "2025-11",
             certificationsUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=D882C1B1345014E818023BEA9942D34A9718ADCF28204E34ED158FBBF1D1A1D9",
         },
         {
             title: "OCI Developer Professional",
             issuer: "Oracle",
-            date: "Oct 2025",
+            date: "Oct '25",
             issuedAt: "2025-10",
             certificationsUrl: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=4369BADDBECEC87FFAB7AC3633A7E8317399BBDC123D9E734B553EA4A0431569",
         },
         {
             title: "Python for Data Science & AI",
             issuer: "IBM Coursera",
-            date: "Oct 2025",
+            date: "Oct '25",
             issuedAt: "2025-10",
             certificationsUrl: "https://www.coursera.org/account/accomplishments/verify/SF891HUZCUPO",
         },
         {
             title: "Social Networks",
             issuer: "NPTEL",
-            date: "May 2025",
+            date: "May '25",
             issuedAt: "2025-05",
             certificationsUrl: "https://drive.google.com/file/d/1_yGVcXbJ3xXDmHjiV2KOnBVYuOXHxVw9/view?usp=sharing",
         },
         {
             title: "Generative AI Essentials",
             issuer: "Microsoft & LinkedIn",
-            date: "Jul 2024",
+            date: "Jul '24",
             issuedAt: "2024-07",
             certificationsUrl: "https://www.linkedin.com/learning/certificates/88a0488c7323d1f8c05da9b8501076b549e8b9c573592a7023fb007948e60f8c?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPV%2FFjUW0S1SH%2FKNxFUstUw%3D%3D",
         },
@@ -137,7 +138,7 @@ export const profile = {
             location: "Phagwara, Punjab",
             qualification: "Bachelor of Technology - Computer Science and Engineering",
             score: "CGPA: 9.18",
-            period: "Aug 2023 - Present",
+            period: "Aug '23 - Present",
             sortValue: 202308,
         },
         {
@@ -145,7 +146,7 @@ export const profile = {
             location: "Srikakulam, Andhra Pradesh",
             qualification: "Intermediate",
             score: "Percentage: 96.2",
-            period: "Jun 2021 - May 2023",
+            period: "Jun '21 - May '23",
             sortValue: 202106,
         },
         {
@@ -153,7 +154,7 @@ export const profile = {
             location: "Srikakulam, Andhra Pradesh",
             qualification: "Matriculation",
             score: "Percentage: 97.5",
-            period: "Jun 2020 - Apr 2021",
+            period: "Jun '20 - Apr '21",
             sortValue: 202006,
         },
     ] as EducationItem[],
@@ -162,7 +163,7 @@ export const profile = {
             title: "AlgoTutor",
             organization: "EdTech Company",
             credential: "Certificate",
-            period: "Jun 2025 - Jul 2025",
+            period: "Jun '25 - Jul '25",
             sortValue: 202507,
             highlights: [
                 "Gained strong proficiency in core DSA concepts through a 28-day intensive competitive programming training, consistently applying concepts in daily problem-solving.",
@@ -176,7 +177,7 @@ export const profile = {
     achievementsDetailed: [
         {
             title: '"HI FLYERS" Achievers Award',
-            date: "Dec 2025",
+            date: "Dec '25",
             sortValue: 202512,
             issuer: "Lovely Professional University",
             description:
@@ -184,21 +185,21 @@ export const profile = {
         },
         {
             title: "MumbaiHacks 2025 Finalist",
-            date: "Nov 2025",
+            date: "Nov '25",
             sortValue: 202511,
             description:
                 "Secured a finalist position at MumbaiHacks 2025 by developing and presenting a functional prototype under time-bound hackathon conditions.",
         },
         {
             title: "LeetCode Algorithmic Excellence",
-            date: "Oct 2025",
+            date: "Oct '25",
             sortValue: 202510,
             description:
                 "Ranked in the Top 35.28% globally with 900+ problems solved across C++, Java, and C. Earned 17 achievement badges and sustained a 390-day problem-solving streak.",
         },
         {
             title: "University Academic Excellence Award",
-            date: "May 2024",
+            date: "May '24",
             sortValue: 202405,
             issuer: "Lovely Professional University",
             description:
@@ -211,6 +212,7 @@ export const portfolioModes: PortfolioMode[] = [
     {
         id: "algoquest",
         name: "AlgoQuest",
+        period: "Jul '25 - Aug '25",
         subName: "Algorithm Visualizer",
         role: "Algorithm Engineer",
         folderPath: "/images/algoquest",
@@ -258,7 +260,8 @@ export const portfolioModes: PortfolioMode[] = [
     },
     {
         id: "dashboard",
-        name: "AI Game Tester",
+        name: "AI-Powered Game Testing Dashboard",
+        period: "Feb '25 - May '25",
         subName: "Gemini-Powered Dashboard",
         role: "AI Engineer",
         folderPath: "/images/dashboard",
@@ -309,7 +312,8 @@ export const portfolioModes: PortfolioMode[] = [
     },
     {
         id: "realestate",
-        name: "Real Estate House Price Predictor",
+        name: "Real Estate Analytics Engine",
+        period: "Feb '25 - Apr '25",
         subName: "ML Analytics Engine",
         role: "Data Scientist",
         folderPath: "/images/realestate",

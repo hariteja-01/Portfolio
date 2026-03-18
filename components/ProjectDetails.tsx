@@ -22,6 +22,9 @@ export default function ProjectDetails({ mode }: ProjectDetailsProps) {
                     <h3 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
                         {mode.detailsSection.title}
                     </h3>
+                    <p className="mt-3 text-sm font-semibold" style={{ color: mode.themeColor }}>
+                        {mode.period}
+                    </p>
                     <div
                         className="h-1 w-16 my-6 rounded-full"
                         style={{ background: mode.themeColor }}

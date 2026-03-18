@@ -159,6 +159,9 @@ function VideoCard({
                     <div className="text-sm text-white/85 mt-0.5" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.72)' }}>
                         {item.description}
                     </div>
+                    <div className="text-xs text-white/75 mt-1" style={{ textShadow: '0 1px 10px rgba(0,0,0,0.72)' }}>
+                        {portfolioModes[item.projectIndex].period}
+                    </div>
 
                     {/* Stats row (active only) */}
                     <div
