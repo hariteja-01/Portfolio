@@ -51,6 +51,18 @@ const skillCategories = [
         items: ["Algorithms & DSA", "Node.js", "Cloud (Oracle OCI)", "C++"],
         color: "#FF6B35",
     },
+    {
+        title: "Soft Skills",
+        items: [
+            "Analytical Problem-Solving",
+            "Strategic Thinking",
+            "Technical Leadership",
+            "Adaptability & Continuous Learning",
+            "Collaborative Communication",
+            "Time Optimization",
+        ],
+        color: "#22C55E",
+    },
 ];
 
 export default function SkillsSection() {
